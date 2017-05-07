@@ -1,0 +1,100 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+  <div class="flexslider">
+  <ul class="slides">
+      <li>
+        <img src="{{asset('bundles/swapplatform/images/imageSlider1.jpg') }}">
+      </li>
+      <li>
+        <img src="{{asset('bundles/swapplatform/images/imageSlider2.jpg') }}">
+      </li>
+      <li>
+        <img src="{{asset('bundles/swapplatform/images/imageSlider3.jpg') }}">
+      </li>
+      <li>
+        <img src="{{asset('bundles/swapplatform/images/imageSlider4.jpg') }}">
+      </li>
+  </ul>
+    </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+      <div class="panel panel-default">
+        <div class="panel-body shadow">
+          <h1 class="titreArticleAccueil"> <span class="glyphicon glyphicon-refresh icone"></span> <br /> <br />
+            LE CONCEPT
+          </h1>
+          <article class="articleAccueil">
+          Swapper.com est le lieu de rencontre pour les individus désireux de voyager à la fois à moindre coût et de façon alternative. C'est un lieu à la fois d'équité, de convivialité et d'échange.
+          Inspiré par les systèmes de Sel (système d'échange local), Swap,com à l'ambition d'appliquer ce système égalitaire aux voyages.
+          L'objectif est de rendre accessible le plus de destinations possible au plus grand nombre sans avoir à débourser un centime!
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+      <div class="panel panel-default">
+      <div class="panel-body shadow">
+        <h1 class="titreArticleAccueil">
+        <span class="glyphicon glyphicon-globe icone"></span> <br /> <br /> VOYAGER AUTREMENT</h1>
+        <article class="articleAccueil">
+          L'intérêt est de favoriser le développement d'un système d'économie solidaire et international appliqué au voyage,
+          L'objectif est bien sûr la rencontre, la convivialité, le partage, de faire des économies.
+          Mais aussi de voyager autrement, car un Swapper à la possibilité de réellement s'imprégner de la culture d'un pays et de ses richesses grâce aux échanges de services.
+          Swap.com permet de créer une communauté de voyageurs solidaires, réunis autour du même désir de rencontre.
+        </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+      <div class="panel panel-default">
+        <div class="panel-body shadow">
+          <h1 class="titreArticleAccueil"><span class="glyphicon glyphicon-ok icone"></span> <br /> <br /> COMMENT CA MARCHE ?</h1>
+          <aricle class="articleAccueil">
+          Pour le swapper, le principe est simple, chaque utilisateur dispose d'un compte SwapBank. Celui-ci est crédité de 50 SwapPoint après s'être inscrit, ce qui équivaut à une nuit.
+          Chaque Swapper doit à son inscription définir les services qui lui est possible de rendre,
+          Cela peut être de fournir un repas, un hébergement, de proposer une excursion, une visite, ou encore d'aller chercher un Swapper à l'aéroport, ou de prêter sa voiture.
+          Puis il indiques ses disponibilités.
+          Caque service rendu vous apportera des points, que vous pourrez vous même redépenser lors de vos voyages!
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+      <div class="panel panel-default">
+        <div class="panel-body shadow">
+        <h1 class="titreArticleAccueil"><span class="glyphicon glyphicon-star icone"></span> <br /> <br /> LE SYSTEME DE POINT</h1>
+        <article class="articleAccueil">
+        Il permet de rétablir les inégalités qu'implique notre système monétaire actuel.
+        C'est pour ça que chez Swap contrairement à d'autres sites les services ont la même valeur peut importe, le lieux où il est prodigué.
+        </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) 
+  var recipient = button.data('whatever') 
+  var modal = $(this)
+  modal.find('.modal-title').text('New message to ' + recipient)
+  modal.find('.modal-body input').val(recipient)
+})</script>
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+swap_platform_homepage:
+    path:     /
+    defaults: { _controller: SwapPlatformBundle:Swap:index }
+
+swap_platform_moncompte:
+    path:     /compte
+    defaults: { _controller: SwapPlatformBundle:Swap:compte }
+
+swap_platform_profil:
+    path:     /profil
+    defaults: { _controller: SwapPlatformBundle:Swap:profil }
+
+swap_platform_modal:
+    path:     /modal
+    defaults: { _controller: SwapPlatformBundle:Swap:modal }

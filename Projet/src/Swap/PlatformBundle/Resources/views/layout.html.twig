@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Swap{% endblock %}</title>
+    <link rel="stylesheet" href="{{asset('bundles/swapplatform/css/style.css') }}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"> 
+
+  	{% block stylesheets %}{% endblock %}
+    </head>
+  <body>
+    {{ include("SwapPlatformBundle:Swap:menuNavigation.html.twig") }}
+    {% block body %}
+    {% endblock %}
+
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</html>
