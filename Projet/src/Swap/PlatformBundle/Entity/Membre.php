@@ -22,74 +22,67 @@ class Membre
     private $id;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateInscription", type="datetime")
-     */
-    private $dateInscription;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
      */
     private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="genre", type="string", length=255)
+     * @ORM\Column(name="genre", type="string", length=255, nullable=true)
      */
     private $genre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nationalite", type="string", length=255)
+     * @ORM\Column(name="nationalite", type="string", length=255, nullable=true)
      */
     private $nationalite;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="profession", type="string", length=255)
+     * @ORM\Column(name="profession", type="string", length=255, nullable=true)
      */
     private $profession;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
-     * @var array
+     * @var string
      *
-     * @ORM\Column(name="langue", type="array")
+     * @ORM\Column(name="motDePasse", type="string", length=255, nullable=false)
      */
-    private $langue;
+    private $motDePasse;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="motDePasse", type="string", length=255)
+     * @ORM\Column(name="verificationMotDePasse", type="string", length=255, nullable=false)
      */
-    private $motDePasse;
+    private $verificationMotDePasse;
 
 
     /**
@@ -100,30 +93,6 @@ class Membre
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set dateInscription
-     *
-     * @param \DateTime $dateInscription
-     *
-     * @return Membre
-     */
-    public function setDateInscription($dateInscription)
-    {
-        $this->dateInscription = $dateInscription;
-
-        return $this;
-    }
-
-    /**
-     * Get dateInscription
-     *
-     * @return \DateTime
-     */
-    public function getDateInscription()
-    {
-        return $this->dateInscription;
     }
 
     /**
@@ -223,9 +192,9 @@ class Membre
     }
 
     /**
-     * Set nationalit‚
+     * Set nationalite
      *
-     * @param string $nationalit‚
+     * @param string $nationalite
      *
      * @return Membre
      */
@@ -237,7 +206,7 @@ class Membre
     }
 
     /**
-     * Get nationalit‚
+     * Get nationalite
      *
      * @return string
      */
@@ -295,30 +264,6 @@ class Membre
     }
 
     /**
-     * Set langue
-     *
-     * @param array $langue
-     *
-     * @return Membre
-     */
-    public function setLangue($langue)
-    {
-        $this->langue = $langue;
-
-        return $this;
-    }
-
-    /**
-     * Get langue
-     *
-     * @return array
-     */
-    public function getLangue()
-    {
-        return $this->langue;
-    }
-
-    /**
      * Set motDePasse
      *
      * @param string $motDePasse
@@ -341,4 +286,29 @@ class Membre
     {
         return $this->motDePasse;
     }
+
+    /**
+     * Set verificationMotDePasse
+     *
+     * @param string $verificationMotDePasse
+     *
+     * @return Membre
+     */
+    public function setVerificationMotDePasse($verificationMotDePasse)
+    {
+        $this->verificationMotDePasse = $verificationMotDePasse;
+
+        return $this;
+    }
+
+    /**
+     * Get verificationMotDePasse
+     *
+     * @return string
+     */
+    public function getVerificationMotDePasse()
+    {
+        return $this->verificationMotDePasse;
+    }
 }
+

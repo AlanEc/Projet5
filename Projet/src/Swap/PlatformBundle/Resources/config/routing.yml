@@ -10,6 +10,10 @@ swap_platform_profil:
     path:     /profil
     defaults: { _controller: SwapPlatformBundle:Swap:profil }
 
+swap_platform_inscription:
+    path:     /inscription
+    defaults: { _controller: SwapPlatformBundle:Swap:inscription }
+
 swap_platform_modal:
     path:     /modal
     defaults: { _controller: SwapPlatformBundle:Swap:modal }

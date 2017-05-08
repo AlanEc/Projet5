@@ -4,9 +4,12 @@ namespace Swap\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Swap\PlatformBundle\Entity\Membre;
+use Swap\PlatformBundle\Entity\MembreInscription;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Swap\PlatformBundle\Form\MembreType;
+use Swap\PlatformBundle\Form\MembreInscriptionType;
 
 class SwapController extends Controller
 {
@@ -27,7 +30,18 @@ class SwapController extends Controller
 
     public function profilAction(Request $request)
     {
-		$membre = new Membre();
+    	$session = new Session();
+    	$idMembre = $session->get('id');
+
+		$repository = $this
+          ->getDoctrine()
+          ->getManager()
+          ->getRepository('SwapPlatformBundle:Membre')
+          ;
+
+        $membre = $repository->findOneBy(
+          array('id' => $idMembre)
+          );
 
 		$formBuilder = $this->get('form.factory')->create(MembreType::class, $membre);
 
@@ -44,6 +58,35 @@ class SwapController extends Controller
 		}
 
 		return $this->render('SwapPlatformBundle:Swap:profil.html.twig', array(
+		'form' => $formBuilder->createView(),
+		));
+	}
+
+	public function inscriptionAction(Request $request)
+    {
+    	$session = new Session();
+
+		$membreInscription = new Membre();
+
+		$formBuilder = $this->get('form.factory')->create(MembreInscriptionType::class, $membreInscription);
+
+		if ($request->isMethod('POST')) {
+		$formBuilder->handleRequest($request);
+
+			if ($formBuilder->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+
+			$em->persist($membreInscription);
+
+			$em->flush();
+			}
+
+		$idMembre = $membreInscription->getId();
+		$session->set('id', $idMembre);
+		return $this->redirectToRoute('swap_platform_moncompte');
+		}
+
+		return $this->render('SwapPlatformBundle:Swap:inscription.html.twig', array(
 		'form' => $formBuilder->createView(),
 		));
 	}
