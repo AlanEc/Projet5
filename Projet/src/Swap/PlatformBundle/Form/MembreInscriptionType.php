@@ -16,10 +16,10 @@ class MembreInscriptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('prenom', TextType::class)
+        ->add('username', TextType::class)
         ->add('nom', TextType::class)
         ->add('email', TextType::class)
-        ->add('motDePasse', TextType::class, array(
+        ->add('password', TextType::class, array(
             'label' => 'Mot de Passe'))
         ->add('verificationMotDePasse', TextType::class, array(
             'label' => 'Verification mot de passe'))

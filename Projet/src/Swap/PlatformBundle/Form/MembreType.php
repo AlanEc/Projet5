@@ -17,7 +17,7 @@ class MembreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('prenom', TextType::class)
+        ->add('username', TextType::class)
         ->add('nom', TextType::class)
         ->add('email', TextType::class)
         ->add('genre', ChoiceType::class, array(

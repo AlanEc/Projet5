@@ -3,6 +3,8 @@
 namespace Swap\PlatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * Membre
@@ -10,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="membre")
  * @ORM\Entity(repositoryClass="Swap\PlatformBundle\Repository\MembreRepository")
  */
-class Membre
+class Membre implements UserInterface
 {
     /**
      * @var int
@@ -24,9 +26,9 @@ class Membre
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=false)
+     * @ORM\Column(name="username", type="string", length=255, nullable=false)
      */
-    private $prenom;
+    private $username;
 
     /**
      * @var string
@@ -75,7 +77,14 @@ class Membre
      *
      * @ORM\Column(name="motDePasse", type="string", length=255, nullable=false)
      */
-    private $motDePasse;
+    private $password;
+
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
+
+    private $salt;
 
     /**
      * @var string
@@ -84,6 +93,11 @@ class Membre
      */
     private $verificationMotDePasse;
 
+    public function eraseCredentials()
+
+  {
+
+  }
 
     /**
      * Get id
@@ -96,27 +110,27 @@ class Membre
     }
 
     /**
-     * Set prenom
+     * Set username
      *
-     * @param string $prenom
+     * @param string $username
      *
      * @return Membre
      */
-    public function setPrenom($prenom)
+    public function setUsername($username)
     {
-        $this->prenom = $prenom;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get prenom
+     * Get username
      *
      * @return string
      */
-    public function getPrenom()
+    public function getUsername()
     {
-        return $this->prenom;
+        return $this->username;
     }
 
     /**
@@ -264,27 +278,37 @@ class Membre
     }
 
     /**
-     * Set motDePasse
+     * Set password
      *
-     * @param string $motDePasse
+     * @param string $password
      *
      * @return Membre
      */
-    public function setMotDePasse($motDePasse)
+    public function setPassword($password)
     {
-        $this->motDePasse = $motDePasse;
+        $this->password = $password;
 
         return $this;
     }
 
+     public function getSalt()
+    {
+        return $this->salt;
+    }
+
+     public function getRoles()
+    {
+        return $this->roles;
+    }
+
     /**
-     * Get motDePasse
+     * Get password
      *
      * @return string
      */
-    public function getMotDePasse()
+    public function getPassword()
     {
-        return $this->motDePasse;
+        return $this->password;
     }
 
     /**

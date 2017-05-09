@@ -17,7 +17,7 @@ login:
         _controller: SwapUserBundle:Security:login
 
 login_check:
-    path: /login_check
+    path: /compte
 
 logout:
     path: /logout
