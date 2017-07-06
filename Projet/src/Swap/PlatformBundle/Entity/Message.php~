@@ -41,6 +41,13 @@ class Message
      */
     private $recipient;
 
+      /**
+     * @var int
+     *
+     * @ORM\Column(name="parenId", type="integer", nullable=true)
+     */
+    private $parentId;
+
     /**
      * @var string
      *
@@ -135,11 +142,11 @@ class Message
     /**
      * Set recipient
      *
-     * @param \Swap\UserBundle\Entity\User $recipient
+     * @param 
      *
      * @return Comment
      */
-    public function setRecipient(\Swap\UserBundle\Entity\User $recipient )
+    public function setRecipient($recipient)
     {
         $this->recipient = $recipient;
 

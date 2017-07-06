@@ -37,3 +37,11 @@ swap_focus:
 swap_message_send:
     path:     /send-message/{id}/{idUser}
     defaults: { _controller: SwapPlatformBundle:Message:sendMessage }
+
+swap_mail_box:
+    path:     /mail-box/
+    defaults: { _controller: SwapPlatformBundle:Message:mailBox}
+
+swap_message_conversation:
+    path:     /message-conversation/{id}/{recipientId}
+    defaults: { _controller: SwapPlatformBundle:Message:conversation}

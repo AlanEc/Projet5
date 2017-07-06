@@ -40,4 +40,57 @@ class MessageController extends Controller
 		'form' => $formBuilder->createView(),
 		));
     }
+
+    public function mailBoxAction(Request $request) 
+    {
+    	$idUser = $this->getUser()->getId();
+    	
+		$repository = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('SwapPlatformBundle:Message')
+		;
+
+		$listMessage = $repository->findBy(
+			array('recipient' => $idUser));
+
+    	return $this->render('SwapPlatformBundle:Service:mailBox.html.twig', array(
+		'listMessage' => $listMessage
+		));
+    }
+
+    public function conversationAction($id, $recipientId, Request $request) 
+    {
+    	$message = new Message();
+    	$formBuilder = $this->get('form.factory')->create(MessageType::class, $message);
+    	$form = $this->container->get('Swap_form.FormCreator');
+        $creationForm = $form->creation($formBuilder, $request, $message);
+
+        $user = $this->getUser(); 
+        $repository = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('SwapPlatformBundle:Message')
+		;
+
+		$listMessage = $repository->findBy(
+			array('parentId' => $id));
+ 
+		if ($formBuilder->isValid()) { 
+			// return $this->redirectToRoute('swap_ajouter_service_details', array(
+   //        'id' => $service->getId()
+   //        ));
+
+		$message->setAuthor($user);
+		$message->setParentId($id);
+		$message->setRecipient($recipientId);
+		$em = $this->getDoctrine()->getManager();
+        $em->persist($message);
+		$em->flush(); }
+
+    	return $this->render('SwapPlatformBundle:Message:conversation.html.twig', array(
+    	'listMessage' => $listMessage,
+		'form' => $formBuilder->createView(),
+		));
+    }
 }

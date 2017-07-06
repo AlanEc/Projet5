@@ -41,6 +41,13 @@ class Message
      */
     private $recipient;
 
+      /**
+     * @var int
+     *
+     * @ORM\Column(name="parenId", type="integer", nullable=true)
+     */
+    private $parentId;
+
     /**
      * @var string
      *
@@ -178,5 +185,29 @@ class Message
     public function getServiceId()
     {
         return $this->serviceId;
+    }
+
+    /**
+     * Set parentId
+     *
+     * @param integer $parentId
+     *
+     * @return Message
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+
+        return $this;
+    }
+
+    /**
+     * Get parentId
+     *
+     * @return integer
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
     }
 }
