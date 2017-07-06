@@ -17,3 +17,23 @@ swap_platform_inscription:
 swap_platform_modal:
     path:     /modal
     defaults: { _controller: SwapPlatformBundle:Swap:modal }
+
+swap_ajouter_service:
+    path:     /ajouter-swap
+    defaults: { _controller: SwapPlatformBundle:Service:ajouter }
+
+swap_ajouter_service_details:
+    path:     /ajouter-swap-details/{id}
+    defaults: { _controller: SwapPlatformBundle:Service:detailsService }
+
+swap_search:
+    path:     /rechercher-swap
+    defaults: { _controller: SwapPlatformBundle:Service:search }
+
+swap_focus:
+    path:     /swap/{id}
+    defaults: { _controller: SwapPlatformBundle:Service:swapFocus }
+
+swap_message_send:
+    path:     /send-message/{id}/{idUser}
+    defaults: { _controller: SwapPlatformBundle:Message:sendMessage }

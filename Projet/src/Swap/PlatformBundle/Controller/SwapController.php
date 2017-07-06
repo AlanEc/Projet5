@@ -3,13 +3,13 @@
 namespace Swap\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Swap\PlatformBundle\Entity\Membre;
-use Swap\PlatformBundle\Entity\MembreInscription;
+use Swap\UserBundle\Entity\User;
+use Swap\UserBundle\Entity\UserInscription;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
-use Swap\PlatformBundle\Form\MembreType;
-use Swap\PlatformBundle\Form\MembreInscriptionType;
+use Swap\UserBundle\Form\UserType;
+use Swap\UserBundle\Form\UserInscriptionType;
 
 class SwapController extends Controller
 {
@@ -20,6 +20,9 @@ class SwapController extends Controller
 
     public function compteAction()
     {
+    	
+    	$session = new Session();
+    	$idMembre = $session->get('id');
         return $this->render('SwapPlatformBundle:Swap:monCompte.html.twig');
     }
 
@@ -30,32 +33,23 @@ class SwapController extends Controller
 
     public function profilAction(Request $request)
     {
+
     	$session = new Session();
     	$idMembre = $session->get('id');
 
 		$repository = $this
           ->getDoctrine()
           ->getManager()
-          ->getRepository('SwapPlatformBundle:Membre')
+          ->getRepository('SwapUserBundle:User')
           ;
 
         $membre = $repository->findOneBy(
           array('id' => $idMembre)
           );
 
-		$formBuilder = $this->get('form.factory')->create(MembreType::class, $membre);
-
-		if ($request->isMethod('POST')) {
-		$formBuilder->handleRequest($request);
-
-			if ($formBuilder->isValid()) {
-			$em = $this->getDoctrine()->getManager();
-
-			$em->persist($membre);
-
-			$em->flush();
-			}
-		}
+		$formBuilder = $this->get('form.factory')->create(UserType::class, $membre);
+		$form = $this->container->get('Swap_form.FormCreator');
+        $creationForm = $form->creation($formBuilder, $request, $membre);
 
 		return $this->render('SwapPlatformBundle:Swap:profil.html.twig', array(
 		'form' => $formBuilder->createView(),
@@ -66,19 +60,20 @@ class SwapController extends Controller
     {
     	$session = new Session();
 
-		$membreInscription = new Membre();
+		$membreInscription = new User();
 
-		$formBuilder = $this->get('form.factory')->create(MembreInscriptionType::class, $membreInscription);
+		$formBuilder = $this->get('form.factory')->create(UserInscriptionType::class, $membreInscription);
 
 		if ($request->isMethod('POST')) {
 		$formBuilder->handleRequest($request);
 
 			if ($formBuilder->isValid()) {
 			$em = $this->getDoctrine()->getManager();
-
+			$membreInscription->setEnabled(true);
 			$em->persist($membreInscription);
 
 			$em->flush();
+
 			}
 
 		$idMembre = $membreInscription->getId();

@@ -1,0 +1,23 @@
+{% extends "SwapPlatformBundle::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Index{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<div id="map" class="col-lg-offset-6"></div>
+	</div>
+	{% for swap in listSwaps %}
+		<div class="row">
+			<div class="col-md-offset-3 col-md-3 ">
+				<div class="panel panel-default">
+					{{ swap.categorie }}
+					{{ swap.adresse }}
+					{{ swap.user }}
+					<a href="{{ path('swap_focus', { 'id': swap.id }) }}">Voir le Swap</a>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+
+{% endblock %}

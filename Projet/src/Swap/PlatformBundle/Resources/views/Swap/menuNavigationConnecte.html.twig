@@ -6,22 +6,22 @@
       </button>
       <a class="navbar-brand" href="#">SwapTravel</a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-      <ul class="col-sm-40">
-      <form class="navbar-form navbar-left searchnavbar" role="search" method="get" id="searchFormNav" action="/search.html">
-      <div class="form-group input-group">
-      <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search colorblue "></span></span>
-      <input id="searchTextFieldNav" name="city" class="form-control input-md" type="text" size="100" placeholder="Rechercher une ville" autocomplete="off" value="" />  
-    </div>
+      <input id="adresse" class="controls" type="text">
+    {{ app.user.username }}
     <div id="iconeNavigation"
       <ul class="nav navbar-nav navbar-right">
         <li class=""><a href="/ma-boite-aux-lettres.html"> <span class="glyphicon glyphicon-envelope fa-lg"></span></a></li>
         <li><a href="#"><span class="glyphicon glyphicon-user fa-lg"></span> Mon compte</a></li>
         <li class="separation">|</li>
         <li><a href="#"><span class="glyphicon glyphicon-log-in fa-lg"></span></a></li>
+        <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        {% else %}
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        {% endif %}</li>
       </ul>
     </div>
     </div>
   </div>
 </nav>
+
