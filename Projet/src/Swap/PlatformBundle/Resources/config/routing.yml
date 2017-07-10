@@ -1,38 +1,38 @@
 swap_platform_homepage:
     path:     /
-    defaults: { _controller: SwapPlatformBundle:Swap:index }
+    defaults: { _controller: SwapPlatformBundle:Index:display }
 
 swap_platform_moncompte:
     path:     /compte
-    defaults: { _controller: SwapPlatformBundle:Swap:compte }
+    defaults: { _controller: SwapPlatformBundle:Profil:account }
 
 swap_platform_profil:
     path:     /profil
-    defaults: { _controller: SwapPlatformBundle:Swap:profil }
+    defaults: { _controller: SwapPlatformBundle:Profil:profil }
 
 swap_platform_inscription:
     path:     /inscription
-    defaults: { _controller: SwapPlatformBundle:Swap:inscription }
+    defaults: { _controller: SwapPlatformBundle:Profil:inscription }
 
 swap_platform_modal:
     path:     /modal
-    defaults: { _controller: SwapPlatformBundle:Swap:modal }
+    defaults: { _controller: SwapPlatformBundle:ModalInscription:modal }
 
 swap_ajouter_service:
     path:     /ajouter-swap
-    defaults: { _controller: SwapPlatformBundle:Service:ajouter }
+    defaults: { _controller: SwapPlatformBundle:Swap:addSwap }
 
 swap_ajouter_service_details:
     path:     /ajouter-swap-details/{id}
-    defaults: { _controller: SwapPlatformBundle:Service:detailsService }
+    defaults: { _controller: SwapPlatformBundle:Swap:detailsSwap }
 
 swap_search:
     path:     /rechercher-swap
-    defaults: { _controller: SwapPlatformBundle:Service:search }
+    defaults: { _controller: SwapPlatformBundle:Swap:search }
 
 swap_focus:
     path:     /swap/{id}
-    defaults: { _controller: SwapPlatformBundle:Service:swapFocus }
+    defaults: { _controller: SwapPlatformBundle:Reservation:resa }
 
 swap_message_send:
     path:     /send-message/{id}/{idUser}
@@ -43,5 +43,5 @@ swap_mail_box:
     defaults: { _controller: SwapPlatformBundle:Message:mailBox}
 
 swap_message_conversation:
-    path:     /message-conversation/{id}/{recipientId}
+    path:     /message-conversation/{idMessage}/{recipientId}
     defaults: { _controller: SwapPlatformBundle:Message:conversation}

@@ -15,5 +15,24 @@
 				</a>
 			</div>
 		</div>
+		<div class="col-md-offset-1 col-md-7">
+			<div class="panel-body shadow Compte">
+				<span class="Reservation"><p>Reservation</p><span>
+			</div>
+		</div>
+		<div class=" col-md-7">
+			<div class="panel-body shadow">
+			<h3>Reservation</h3>
+			<span class="sousTitre"><p>Effectuer une réservation</p><span>
+				{{ form_start(form) }}
+				{# Les erreurs générales du formulaire. #}
+				{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_row(form.dateArrival, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_row(form.dateDeparture, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-primary ' }} ) }}        
+				{{ form_rest(form, { 'attr': { 'class' : 'form-control' }} ) }}
+				{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
+			</div>
+		</div>
 
 {% endblock %}

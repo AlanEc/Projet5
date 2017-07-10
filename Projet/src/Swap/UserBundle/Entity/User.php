@@ -57,6 +57,12 @@ class User extends BaseUser
     private $sendMessage;
 
     /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="reservation", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reservationsMade;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="string", length=255, nullable=true)

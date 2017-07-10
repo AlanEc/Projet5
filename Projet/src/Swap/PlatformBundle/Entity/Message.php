@@ -5,10 +5,10 @@ namespace Swap\PlatformBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
+ * Message
  *
  * @ORM\Table(name="message")
- * @ORM\Entity(repositoryClass="Swap\PlatformBundle\Repository\CommentRepository")
+ * @ORM\Entity(repositoryClass="Swap\PlatformBundle\Repository\MessageRepository")
  */
 class Message
 {
