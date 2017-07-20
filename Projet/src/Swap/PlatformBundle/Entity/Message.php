@@ -118,11 +118,11 @@ class Message
     /**
      * Set author
      *
-     * @param \Swap\UserBundle\Entity\User $author
+     * @param $author
      *
      * @return Comment
      */
-    public function setAuthor(\Swap\UserBundle\Entity\User $author)
+    public function setAuthor($author)
     {
         $this->author = $author;
 
@@ -132,7 +132,7 @@ class Message
     /**
      * Get author
      *
-     * @return \Swap\UserBundle\Entity\User
+     * @return 
      */
     public function getAuthor()
     {

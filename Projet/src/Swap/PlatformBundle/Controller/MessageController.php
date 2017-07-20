@@ -61,7 +61,7 @@ class MessageController extends Controller
 		));
     }
 
-    public function conversationAction($idMessage, $recipientId, Request $request) 
+    public function conversationAction($serviceId, $idMessage, $recipientId, Request $request) 
     {
     	$message = new Message();
     	$formBuilder = $this->get('form.factory')->create(MessageType::class, $message);
@@ -79,21 +79,50 @@ class MessageController extends Controller
 // var_dump(idMessage);
 		$listMessage = $repository->findBy(
 			array('parentId' => $idMessage));
+
+		$messageParent = $repository->findOneBy(
+			array('id' => $idMessage));
+
+$l = $messageParent->getRecipient();
+
+
+        $repository = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('SwapPlatformBundle:Service')
+		;
+
+		$service = $repository->findOneBy(
+			array('id' => $serviceId));
  
 		if ($formBuilder->isValid()) { 
 			// return $this->redirectToRoute('swap_ajouter_service_details', array(
    //        'idMessage' => $service->getId()
    //        ));
 
+		if ($user->getId() == $l ) {
 		$message->setAuthor($user);
 		$message->setParentId($idMessage);
+		$message->setServiceId($serviceId);
 		$message->setRecipient($recipientId);
 		$em = $this->getDoctrine()->getManager();
         $em->persist($message);
-		$em->flush(); }
+		$em->flush(); 
+	} else {
+
+		$message->setAuthor($user);
+		$message->setParentId($idMessage);
+		$message->setServiceId($serviceId);
+		$message->setRecipient($l);
+		$em = $this->getDoctrine()->getManager();
+        $em->persist($message);
+		$em->flush(); 
+
+	}}
 
     	return $this->render('SwapPlatformBundle:Message:conversation.html.twig', array(
     	'listMessage' => $listMessage,
+    	'userId' => $user->getId(),
 		'form' => $formBuilder->createView(),
 		));
     }

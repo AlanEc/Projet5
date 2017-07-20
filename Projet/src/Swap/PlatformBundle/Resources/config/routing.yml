@@ -43,5 +43,5 @@ swap_mail_box:
     defaults: { _controller: SwapPlatformBundle:Message:mailBox}
 
 swap_message_conversation:
-    path:     /message-conversation/{idMessage}/{recipientId}
+    path:     /message-conversation/{serviceId}/{idMessage}/{recipientId}
     defaults: { _controller: SwapPlatformBundle:Message:conversation}

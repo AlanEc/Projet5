@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class UserType extends AbstractType
 {
@@ -18,8 +19,9 @@ class UserType extends AbstractType
     {
         $builder
         ->add('username', TextType::class)
-        // ->add('nom', TextType::class)
         ->add('email', TextType::class)
+        ->add('image', FileType::class, array('label' => 'Image',
+            'multiple' => true, ))
         ->add('genre', ChoiceType::class, array(
             'label' => 'Genre',
             'choices' => array(

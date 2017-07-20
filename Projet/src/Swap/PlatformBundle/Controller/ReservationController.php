@@ -13,8 +13,6 @@ use Swap\UserBundle\Form\UserInscriptionType;
 use Swap\PlatformBundle\Form\ReservationType;
 use Swap\PlatformBundle\Entity\Reservation;
 
-
-
 class ReservationController extends Controller
 {
 	public function resaAction($id, Request $request)

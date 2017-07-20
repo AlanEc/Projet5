@@ -3,16 +3,34 @@
 {% block title %}{{ parent() }} - Index{% endblock %}
 
 {% block body %}
-	{% for message in listMessage %}
-		<div class="row">
-			<div class="col-md-offset-3 col-md-3 ">
-				<div class="panel panel-default">
-					{{ message.content }}
-					<a href="{{ path('swap_message_conversation', { 'idMessage': message.id, 'recipientId': message.author.id }) }}">
-					<button id="boutonProfil" class="btn btn-primary text-center col-md-12">Envoyer un message</button>
-				</a>
-				</div>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10 ">
+			<div id="mailBox">
+				{% for message in listMessage %}
+					<div class="row">
+						<div class="col-md-offset-1 col-md-10 ">
+							<div>
+								<a href="{{ path('swap_message_conversation', { 'serviceId': message.serviceId,'idMessage': message.id, 'recipientId': message.author.id }) }}">
+									
+											<div id="silhouette" class="col-xs-1">
+							                 <img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+							                 </div>
+									
+										<div class="col-md-offset-1 col-md-2 ">
+											{{ message.author.username }}
+										</div>
+										<div class="col-md-2 ">
+											{{ message.content }}
+										</div>
+									
+												
+								</a>
+							</div>
+						</div>
+					</div>
+					<hr/>
+				{% endfor %}
 			</div>
 		</div>
-	{% endfor %}
+	</div>
 {% endblock %}

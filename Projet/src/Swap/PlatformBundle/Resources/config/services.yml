@@ -2,3 +2,5 @@ services:
     Swap_form.FormCreator:
         class: Swap\PlatformBundle\Services\FormCreator
         arguments: ["@doctrine.orm.entity_manager"] 
+
+    

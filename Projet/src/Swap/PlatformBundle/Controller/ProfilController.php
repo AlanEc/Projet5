@@ -7,6 +7,7 @@ use Swap\UserBundle\Entity\User;
 use Swap\UserBundle\Entity\UserInscription;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Swap\UserBundle\Form\UserType;
 use Swap\UserBundle\Form\UserInscriptionType;
@@ -22,23 +23,31 @@ class ProfilController extends Controller
 
   public function profilAction(Request $request)
   {
+    $user = $this->getUser(); 
 
-  	$session = new Session();
-  	$idMembre = $session->get('id');
+		$formBuilder = $this->get('form.factory')->create(UserType::class, $user);
+		// $form = $this->container->get('Swap_form.FormCreator');
+  //   $creationForm = $form->creation($formBuilder, $request, $membre);
 
-    $repository = $this
-    ->getDoctrine()
-    ->getManager()
-    ->getRepository('SwapUserBundle:User')
-    ;
+     if ($request->isMethod('POST')) {
+        $formBuilder->handleRequest($request);
 
-    $membre = $repository->findOneBy(
-      array('id' => $idMembre)
-    );
-
-		$formBuilder = $this->get('form.factory')->create(UserType::class, $membre);
-		$form = $this->container->get('Swap_form.FormCreator');
-    $creationForm = $form->creation($formBuilder, $request, $membre);
+      if ($formBuilder->isSubmitted() && $formBuilder->isValid()) {      
+        $file = $user->getImage();
+        // $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        // $file->move(
+        //   $this->getParameter('images_directory'),
+        //   $fileName
+        // );
+        // $fileName = $fileUploader->upload($file);
+        $fileUpload = $this->container->get('file_upload');
+        $fileName = $fileUpload->upload($file);
+        $user->setImage($fileName);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+      }
+    }
 
 		return $this->render('SwapPlatformBundle:Swap:profil.html.twig', array(
 		'form' => $formBuilder->createView(),

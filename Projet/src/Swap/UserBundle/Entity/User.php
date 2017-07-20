@@ -4,6 +4,8 @@ namespace Swap\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -49,6 +51,14 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $services;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $image;
 
     /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Message", mappedBy="user", cascade={"persist"}))
@@ -338,5 +348,15 @@ class User extends BaseUser
     public function getSendMessage()
     {
         return $this->sendMessage;
+    }
+
+    public function setImage($file)
+    {
+        $this->image = $file;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }

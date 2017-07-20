@@ -49,8 +49,9 @@ class Reservation
     private $UserReservation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Swap\PlatformBundle\Entity\Service",inversedBy="reservations")
-     * @ORM\JoinColumn(nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="service", type="string", length=255)
      */
     private $service;
 
@@ -159,4 +160,29 @@ class Reservation
     {
         return $this->UserReservation;
     }
+
+    /**
+     * Set service
+     *
+     * @param \Swap\PlatformBundle\Entity\Service $service
+     *
+     * @return Reservation
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+
+        return $this;
+    }
+
+    /**
+     * Get service
+     *
+     * @return \Swap\PlatformBundle\Entity\Service
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
 }
