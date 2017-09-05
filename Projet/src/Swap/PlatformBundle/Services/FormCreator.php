@@ -22,10 +22,10 @@ class FormCreator
     if ($request->isMethod('POST')) {
      $formBuilder->handleRequest($request);
 
-      if ($formBuilder->isValid()) {     
-      $this->em->persist($entity);
-      $this->em->flush();
-      }
+      // if ($formBuilder->isValid()) {     
+      // $this->em->persist($entity);
+      // $this->em->flush();
+      // }
     }
   }
 }

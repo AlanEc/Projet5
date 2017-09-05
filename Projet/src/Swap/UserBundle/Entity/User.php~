@@ -4,6 +4,8 @@ namespace Swap\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
@@ -51,10 +53,30 @@ class User extends BaseUser
     private $services;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $image;
+
+    /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Message", mappedBy="user", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
     private $sendMessage;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Message", mappedBy="user", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $recipientMessage;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="reservation", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reservationsMade;
 
     /**
      * @var string
@@ -298,5 +320,49 @@ class User extends BaseUser
     public function getServices()
     {
         return $this->services;
+    }
+
+    /**
+     * Add sendMessage
+     *
+     * @param \Swap\PlatformBundle\Entity\Message $sendMessage
+     *
+     * @return User
+     */
+    public function addSendMessage(\Swap\PlatformBundle\Entity\Message $sendMessage)
+    {
+        $this->sendMessage[] = $sendMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove sendMessage
+     *
+     * @param \Swap\PlatformBundle\Entity\Message $sendMessage
+     */
+    public function removeSendMessage(\Swap\PlatformBundle\Entity\Message $sendMessage)
+    {
+        $this->sendMessage->removeElement($sendMessage);
+    }
+
+    /**
+     * Get sendMessage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSendMessage()
+    {
+        return $this->sendMessage;
+    }
+
+    public function setImage($file)
+    {
+        $this->image = $file;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 }

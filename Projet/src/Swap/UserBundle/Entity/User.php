@@ -67,7 +67,13 @@ class User extends BaseUser
     private $sendMessage;
 
     /**
-     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="reservation", cascade={"persist"}))
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Message", mappedBy="user", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $recipientMessage;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="userReservation", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
     private $reservationsMade;
@@ -358,5 +364,73 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add recipientMessage
+     *
+     * @param \Swap\PlatformBundle\Entity\Message $recipientMessage
+     *
+     * @return User
+     */
+    public function addRecipientMessage(\Swap\PlatformBundle\Entity\Message $recipientMessage)
+    {
+        $this->recipientMessage[] = $recipientMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove recipientMessage
+     *
+     * @param \Swap\PlatformBundle\Entity\Message $recipientMessage
+     */
+    public function removeRecipientMessage(\Swap\PlatformBundle\Entity\Message $recipientMessage)
+    {
+        $this->recipientMessage->removeElement($recipientMessage);
+    }
+
+    /**
+     * Get recipientMessage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecipientMessage()
+    {
+        return $this->recipientMessage;
+    }
+
+    /**
+     * Add reservationsMade
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $reservationsMade
+     *
+     * @return User
+     */
+    public function addReservationsMade(\Swap\PlatformBundle\Entity\Reservation $reservationsMade)
+    {
+        $this->reservationsMade[] = $reservationsMade;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservationsMade
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $reservationsMade
+     */
+    public function removeReservationsMade(\Swap\PlatformBundle\Entity\Reservation $reservationsMade)
+    {
+        $this->reservationsMade->removeElement($reservationsMade);
+    }
+
+    /**
+     * Get reservationsMade
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservationsMade()
+    {
+        return $this->reservationsMade;
     }
 }

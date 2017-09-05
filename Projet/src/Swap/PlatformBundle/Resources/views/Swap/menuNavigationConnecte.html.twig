@@ -11,7 +11,7 @@
     <div id="iconeNavigation"
       <ul class="nav navbar-nav navbar-right">
         <li class=""><a href="{{ path('swap_mail_box') }}"> <span class="glyphicon glyphicon-envelope fa-lg"></span></a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-user fa-lg"></span> Mon compte</a></li>
+        <li><a href="{{ path('swap_platform_moncompte') }}"><span class="glyphicon glyphicon-user fa-lg"></span> Mon compte</a></li>
         <li class="separation">|</li>
         <li><a href="#"><span class="glyphicon glyphicon-log-in fa-lg"></span></a></li>
         <li>{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

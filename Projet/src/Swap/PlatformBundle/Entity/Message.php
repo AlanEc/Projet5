@@ -35,9 +35,8 @@ class Message
     private $author;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="recipient", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="recipientMessage")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $recipient;
 
@@ -55,6 +54,17 @@ class Message
      */
     private $content;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="Date", type="datetime")
+     */
+    private $date;
+
+    public function __construct() 
+    {
+        $this->date = new \Datetime();
+    }
 
     /**
      * Get id
@@ -209,5 +219,29 @@ class Message
     public function getParentId()
     {
         return $this->parentId;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Message
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date->format('d-m-Y H:i:s');;
     }
 }

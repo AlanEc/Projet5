@@ -46,7 +46,7 @@ class Reservation
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $UserReservation;
+    private $userReservation;
 
     /**
      * @var string
@@ -144,9 +144,9 @@ class Reservation
      *
      * @return Reservation
      */
-    public function setUserReservation(\Swap\UserBundle\Entity\User $userReservation = null)
+    public function setUserReservation(\Swap\UserBundle\Entity\User $userReservation)
     {
-        $this->UserReservation = $userReservation;
+        $this->userReservation = $userReservation;
 
         return $this;
     }
@@ -158,7 +158,7 @@ class Reservation
      */
     public function getUserReservation()
     {
-        return $this->UserReservation;
+        return $this->userReservation;
     }
 
     /**

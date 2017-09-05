@@ -18,7 +18,12 @@ class ProfilController extends Controller
   {
   	$session = new Session();
   	$idMembre = $session->get('id');
-    return $this->render('SwapPlatformBundle:Swap:monCompte.html.twig');
+    $user = $this->getUser(); 
+
+    var_dump($user->getReservationsMade()[0]->getService());
+    return $this->render('SwapPlatformBundle:Swap:monCompte.html.twig', array(
+    'user' => $user,
+    ));
   }
 
   public function profilAction(Request $request)

@@ -5,10 +5,10 @@ namespace Swap\PlatformBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
+ * Message
  *
  * @ORM\Table(name="message")
- * @ORM\Entity(repositoryClass="Swap\PlatformBundle\Repository\CommentRepository")
+ * @ORM\Entity(repositoryClass="Swap\PlatformBundle\Repository\MessageRepository")
  */
 class Message
 {
@@ -35,9 +35,8 @@ class Message
     private $author;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="recipient", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="recipientMessage")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $recipient;
 
@@ -55,6 +54,17 @@ class Message
      */
     private $content;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="Date", type="datetime")
+     */
+    private $date;
+
+    public function __construct() 
+    {
+        $this->date = new \Datetime();
+    }
 
     /**
      * Get id
@@ -118,11 +128,11 @@ class Message
     /**
      * Set author
      *
-     * @param \Swap\UserBundle\Entity\User $author
+     * @param $author
      *
      * @return Comment
      */
-    public function setAuthor(\Swap\UserBundle\Entity\User $author)
+    public function setAuthor($author)
     {
         $this->author = $author;
 
@@ -132,7 +142,7 @@ class Message
     /**
      * Get author
      *
-     * @return \Swap\UserBundle\Entity\User
+     * @return 
      */
     public function getAuthor()
     {
@@ -185,5 +195,29 @@ class Message
     public function getServiceId()
     {
         return $this->serviceId;
+    }
+
+    /**
+     * Set parentId
+     *
+     * @param integer $parentId
+     *
+     * @return Message
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+
+        return $this;
+    }
+
+    /**
+     * Get parentId
+     *
+     * @return integer
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
     }
 }
