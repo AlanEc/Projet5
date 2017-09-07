@@ -22,7 +22,7 @@ class Service
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="user", cascade={"persist"}))
+     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="services")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;
@@ -61,6 +61,12 @@ class Service
      * @ORM\Column(name="vegetarien", type="string", length=255, nullable=true)
      */
     private $vegetarien;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="service", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reservations;
 
 
     /**

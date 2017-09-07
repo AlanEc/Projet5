@@ -21,10 +21,14 @@ class SwapController extends Controller
     	$formBuilder = $this->get('form.factory')->create(ServiceType::class, $service);
     	$form = $this->container->get('Swap_form.FormCreator');
       $creationForm = $form->creation($formBuilder, $request, $service);
- 
-		if ($formBuilder->isValid()) { return $this->redirectToRoute('swap_ajouter_service_details', array(
-      'id' => $service->getId()
-      )); }
+      
+  		if ($formBuilder->isValid()) { 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($service);
+        $em->flush();
+        return $this->redirectToRoute('swap_ajouter_service_details', array(
+        'id' => $service->getId()
+        )); }
 
       return $this->render('SwapPlatformBundle:Service:ajouterSwap.html.twig', array(
       'form' => $formBuilder->createView(),

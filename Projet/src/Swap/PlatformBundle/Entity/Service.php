@@ -62,6 +62,12 @@ class Service
      */
     private $vegetarien;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="service", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $reservations;
+
 
     /**
      * Get id
@@ -215,5 +221,46 @@ class Service
     public function getUser()
     {
         return $this->user;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->reservations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add reservation
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $reservation
+     *
+     * @return Service
+     */
+    public function addReservation(\Swap\PlatformBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservation
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $reservation
+     */
+    public function removeReservation(\Swap\PlatformBundle\Entity\Reservation $reservation)
+    {
+        $this->reservations->removeElement($reservation);
+    }
+
+    /**
+     * Get reservations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
     }
 }

@@ -40,11 +40,37 @@
 					<div class="panel-body shadow Compte">
 						<span class="titreCompte"><p>Prochains services que vous allez recevoir</p><span>
 						<hr>
+						<table>
+						<thead>
+							<tr>
+								<th>Statut</th>
+								<th>Date/Service</th>
+								<th>Membre</th>
+								<th>Détails</th>
+							</tr>
+						</thead>
+						{% for reservation in reservations %}
+							<tbody>
+								<tr>
+									<td></td>
+									<td>
+										{{ reservation.service.categorie }}</br>
+										Du : {{ reservation.dateArrival }}</br>
+										Au : {{ reservation.dateDeparture }}
+									</td>
+									<td>
+										{{ reservation.service.user.username }}
+									</td>
+									<td>Détails</td>
+								</tr>
+							</tbody>
+						{% endfor %}
+						</table>
 				</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-body shadow Compte">
-						<span class="titreCompte"><p>Historique des services que vous avez rendus</p><span>
+						<span class="titreCompte"><p>Prochains service que allez rendre</p><span>
 						<hr>
 				</div>
 			<div class="row">

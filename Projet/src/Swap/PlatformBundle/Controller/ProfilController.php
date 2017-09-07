@@ -20,9 +20,10 @@ class ProfilController extends Controller
   	$idMembre = $session->get('id');
     $user = $this->getUser(); 
 
-    var_dump($user->getReservationsMade()[0]->getService());
+// var_dump($reservationToRender[0]->getService()->getUser()->getId());
     return $this->render('SwapPlatformBundle:Swap:monCompte.html.twig', array(
     'user' => $user,
+    'reservations' => $user->getReservationsMade(),
     ));
   }
 

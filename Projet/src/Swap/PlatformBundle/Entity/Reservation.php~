@@ -46,12 +46,11 @@ class Reservation
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $UserReservation;
+    private $userReservation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="service", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="Swap\PlatformBundle\Entity\Service",inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $service;
 
@@ -98,7 +97,7 @@ class Reservation
      */
     public function setDateDeparture($dateDeparture)
     {
-        $this->dateDeparture = $dateDeparture;
+        $this->dateDeparture = $dateDeparture->format('Y-m-d');
 
         return $this;
     }
@@ -122,7 +121,7 @@ class Reservation
      */
     public function setDateArrival($dateArrival)
     {
-        $this->dateArrival = $dateArrival;
+        $this->dateArrival = $dateArrival->format('Y-m-d');
 
         return $this;
     }
@@ -144,9 +143,9 @@ class Reservation
      *
      * @return Reservation
      */
-    public function setUserReservation(\Swap\UserBundle\Entity\User $userReservation = null)
+    public function setUserReservation(\Swap\UserBundle\Entity\User $userReservation)
     {
-        $this->UserReservation = $userReservation;
+        $this->userReservation = $userReservation;
 
         return $this;
     }
@@ -158,7 +157,7 @@ class Reservation
      */
     public function getUserReservation()
     {
-        return $this->UserReservation;
+        return $this->userReservation;
     }
 
     /**

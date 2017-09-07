@@ -7,7 +7,6 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-
 /**
  * Membre
  *
@@ -77,6 +76,12 @@ class User extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $reservationsMade;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="userService", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $userReservation;
 
     /**
      * @var string
@@ -244,7 +249,7 @@ class User extends BaseUser
         return $this;
     }
 
-     public function getSalt()
+    public function getSalt()
     {
         return $this->salt;
     }
@@ -432,5 +437,39 @@ class User extends BaseUser
     public function getReservationsMade()
     {
         return $this->reservationsMade;
+    }
+
+    /**
+     * Add reservationsMade
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $userReservation
+     *
+     * @return User
+     */
+    public function addUserReservation(\Swap\PlatformBundle\Entity\Reservation $userReservation)
+    {
+        $this->userReservation[] = $userReservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userReservation
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $userReservation
+     */
+    public function removeUserReservation(\Swap\PlatformBundle\Entity\Reservation $userReservation)
+    {
+        $this->userReservation->removeElement($userReservation);
+    }
+
+    /**
+     * Get userReservation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserReservation()
+    {
+        return $this->userReservation;
     }
 }

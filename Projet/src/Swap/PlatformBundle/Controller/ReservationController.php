@@ -32,9 +32,11 @@ class ReservationController extends Controller
 		$user = $this->getUser(); 
 
 		if ($formBuilder->isValid()) { 
-			$reservation->setService($id);
+			$reservation->setService($service);
 			$user->addReservationsMade($reservation);
+			$user->addUserReservation($reservation);
 			$reservation->setUserReservation($user);
+			$reservation->setUserService($service->getUser());
 			$em = $this->getDoctrine()->getManager();
 	        $em->persist($reservation);
 			$em->flush(); 
