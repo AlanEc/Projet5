@@ -43,13 +43,20 @@ class Reservation
     private $dateArrival;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="totalSwapPoints", type="string", length=255)
+     */
+    private $totalSwapPoints;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
     private $userReservation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationReservation")
+     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="userReservation")
      * @ORM\JoinColumn(nullable=true)
      */
     private $userService;
@@ -117,6 +124,7 @@ class Reservation
     public function getDateDeparture()
     {
         return $this->dateDeparture;
+;
     }
 
     /**
@@ -215,4 +223,28 @@ class Reservation
         return $this->service;
     }
 
+
+    /**
+     * Set totalSwapPoints
+     *
+     * @param \DateTime $totalSwapPoints
+     *
+     * @return Reservation
+     */
+    public function setTotalSwapPoints($totalSwapPoints)
+    {
+        $this->totalSwapPoints = $totalSwapPoints;
+
+        return $this;
+    }
+
+    /**
+     * Get totalSwapPoints
+     *
+     * @return \DateTime
+     */
+    public function getTotalSwapPoints()
+    {
+        return $this->totalSwapPoints;
+    }
 }

@@ -38,6 +38,10 @@ class ReservationController extends Controller
 			$reservation->setUserReservation($user);
 			$reservation->setUserService($service->getUser());
 			$em = $this->getDoctrine()->getManager();
+			$calcul = $this->container->get('swap_points.CalculPoints');
+        	$totalPoints = $calcul->calcul($reservation);
+        	var_dump($reservation->getService()->getSwapPoints());
+        	$reservation->setTotalSwapPoints($totalPoints);
 	        $em->persist($reservation);
 			$em->flush(); 
 		}

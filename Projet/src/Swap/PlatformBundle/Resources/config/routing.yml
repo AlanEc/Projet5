@@ -30,6 +30,14 @@ swap_search:
     path:     /rechercher-swap
     defaults: { _controller: SwapPlatformBundle:Swap:search }
 
+swap_calendar:
+    path:     /swap-calendrier
+    defaults: { _controller: SwapPlatformBundle:Swap:manageCalendar }
+
+swap_manage_swap:
+    path:     /manage-swaps
+    defaults: { _controller: SwapPlatformBundle:Swap:manageMySwaps }
+
 swap_focus:
     path:     /swap/{id}
     defaults: { _controller: SwapPlatformBundle:Reservation:resa }

@@ -74,4 +74,20 @@ class SwapController extends Controller
       'listSwaps' => $listSwaps
       ));
    	}
+
+    public function manageMySwapsAction()
+    {
+      $user = $this->getUser(); 
+      return $this->render('SwapPlatformBundle:Swap:mySwaps.html.twig', array(
+        'user' => $user,
+        'services' => $user->getServices(),
+      ));
+    }
+
+    public function manageCalendarAction()
+    {
+      return $this->render('SwapPlatformBundle:Swap:calendar.html.twig', array(
+
+      ));
+    }
 }

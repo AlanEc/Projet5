@@ -24,6 +24,7 @@ class ProfilController extends Controller
     return $this->render('SwapPlatformBundle:Swap:monCompte.html.twig', array(
     'user' => $user,
     'reservations' => $user->getReservationsMade(),
+    'servicesToRender' => $user->getUserReservation(),
     ));
   }
 

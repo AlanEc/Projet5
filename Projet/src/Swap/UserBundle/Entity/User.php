@@ -46,6 +46,13 @@ class User extends BaseUser
     protected $profession;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="swapBank", type="string", length=255, nullable=true)
+     */
+    protected $swapBank;
+
+    /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Service", mappedBy="user", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
@@ -471,5 +478,29 @@ class User extends BaseUser
     public function getUserReservation()
     {
         return $this->userReservation;
+    }
+
+    /**
+     * Set swapBank
+     *
+     * @param string $swapBank
+     *
+     * @return User
+     */
+    public function setSwapBank($swapBank)
+    {
+        $this->swapBank = $swapBank;
+
+        return $this;
+    }
+
+    /**
+     * Get swapBank
+     *
+     * @return string
+     */
+    public function getSwapBank()
+    {
+        return $this->swapBank;
     }
 }

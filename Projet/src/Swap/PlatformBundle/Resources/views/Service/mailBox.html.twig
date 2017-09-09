@@ -12,19 +12,15 @@
 							<div class="col-md-offset-1 col-md-10 ">
 								<div>
 									<a href="{{ path('swap_message_conversation', { 'serviceId': message.serviceId,'idMessage': message.id, 'recipientId': message.author.id }) }}">
-										
-												<div id="silhouette" class="col-xs-1">
-								                 <img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
-								                 </div>
-										
-											<div class="col-md-offset-1 col-md-2 ">
-												{{ message.author.username }}
-											</div>
-											<div class="col-md-2 ">
-												{{ message.content }}
-											</div>
-										
-													
+									<div id="silhouette" class="col-xs-1">
+										<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+									</div>
+									<div class="col-md-offset-1 col-md-2 ">
+										 message.author.username }}
+									</div>
+									<div class="col-md-2 ">
+										{{ message.content }}
+									</div>				
 									</a>
 								</div>
 							</div>
@@ -32,20 +28,17 @@
 							<div class="row">
 							<div class="col-md-offset-1 col-md-10 ">
 								<div>
-									<a href="{{ path('swap_message_conversation', { 'serviceId': message.serviceId,'idMessage': message.id, 'recipientId': message.author.id }) }}">
-										
-												<div id="silhouette" class="col-xs-1">
-								                 <img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
-								                 </div>
-										
-											<div class="col-md-offset-1 col-md-2 ">
-												{{ message.recipient.username }}
-											</div>
-											<div class="col-md-2 ">
-												{{ message.content }}
-											</div>
-										
-													
+									<a href="{{ path('swap_message_conversation', { 'serviceId': message.serviceId,'idMessage': message.id, 'recipientId': message.author.id }) }}">	
+										<div id="silhouette" class="col-xs-1">
+										<img class="img-responsive img-circle" src="{{asset('bundles/swapplatform/images/silhouette.png') }}"  />
+										</div>
+
+										<div class="col-md-offset-1 col-md-2 ">
+										{{ message.recipient.username }}
+										</div>
+										<div class="col-md-2 ">
+										{{ message.content }}
+										</div>				
 									</a>
 								</div>
 							</div>

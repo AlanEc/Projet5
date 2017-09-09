@@ -43,10 +43,24 @@ class Reservation
     private $dateArrival;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="totalSwapPoints", type="string", length=255)
+     */
+    private $totalSwapPoints;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
     private $userReservation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="userReservation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $userService;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Swap\PlatformBundle\Entity\Service",inversedBy="reservations")
@@ -97,7 +111,7 @@ class Reservation
      */
     public function setDateDeparture($dateDeparture)
     {
-        $this->dateDeparture = $dateDeparture->format('Y-m-d');
+        $this->dateDeparture = $dateDeparture;
 
         return $this;
     }
@@ -110,6 +124,7 @@ class Reservation
     public function getDateDeparture()
     {
         return $this->dateDeparture;
+;
     }
 
     /**
@@ -121,7 +136,7 @@ class Reservation
      */
     public function setDateArrival($dateArrival)
     {
-        $this->dateArrival = $dateArrival->format('Y-m-d');
+        $this->dateArrival = $dateArrival;
 
         return $this;
     }
@@ -161,6 +176,30 @@ class Reservation
     }
 
     /**
+     * Set userService
+     *
+     * @param \Swap\UserBundle\Entity\User $userService
+     *
+     * @return Reservation
+     */
+    public function setUserService(\Swap\UserBundle\Entity\User $userService)
+    {
+        $this->userService = $userService;
+
+        return $this;
+    }
+
+    /**
+     * Get userService
+     *
+     * @return \Swap\UserBundle\Entity\User
+     */
+    public function getUserService()
+    {
+        return $this->userService;
+    }
+
+    /**
      * Set service
      *
      * @param \Swap\PlatformBundle\Entity\Service $service
@@ -184,4 +223,28 @@ class Reservation
         return $this->service;
     }
 
+
+    /**
+     * Set totalSwapPoints
+     *
+     * @param \DateTime $totalSwapPoints
+     *
+     * @return Reservation
+     */
+    public function setTotalSwapPoints($totalSwapPoints)
+    {
+        $this->totalSwapPoints = $totalSwapPoints;
+
+        return $this;
+    }
+
+    /**
+     * Get totalSwapPoints
+     *
+     * @return \DateTime
+     */
+    public function getTotalSwapPoints()
+    {
+        return $this->totalSwapPoints;
+    }
 }

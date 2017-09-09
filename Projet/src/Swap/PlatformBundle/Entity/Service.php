@@ -63,11 +63,17 @@ class Service
     private $vegetarien;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="swapPoints", type="string", length=255, nullable=true)
+     */
+    private $swapPoints;
+
+    /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="service", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
     private $reservations;
-
 
     /**
      * Get id
@@ -89,6 +95,10 @@ class Service
     public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
+        if ($categorie == 'Hebergement') {
+            $points = '10';
+            $this->swapPoints = $points;
+        }
 
         return $this;
     }
@@ -262,5 +272,29 @@ class Service
     public function getReservations()
     {
         return $this->reservations;
+    }
+
+    /**
+     * Set swapPoints
+     *
+     * @param string $swapPoints
+     *
+     * @return Service
+     */
+    public function setSwapPoints($swapPoints)
+    {
+        $this->swapPoints = $swapPoints;
+
+        return $this;
+    }
+
+    /**
+     * Get swapPoints
+     *
+     * @return string
+     */
+    public function getSwapPoints()
+    {
+        return $this->swapPoints;
     }
 }

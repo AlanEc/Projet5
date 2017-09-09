@@ -7,7 +7,6 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-
 /**
  * Membre
  *
@@ -47,6 +46,13 @@ class User extends BaseUser
     protected $profession;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="swapBank", type="string", length=255, nullable=true)
+     */
+    protected $swapBank;
+
+    /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Service", mappedBy="user", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
@@ -73,10 +79,16 @@ class User extends BaseUser
     private $recipientMessage;
 
     /**
-     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="reservation", cascade={"persist"}))
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="userReservation", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
     private $reservationsMade;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="userService", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $userReservation;
 
     /**
      * @var string
@@ -244,7 +256,7 @@ class User extends BaseUser
         return $this;
     }
 
-     public function getSalt()
+    public function getSalt()
     {
         return $this->salt;
     }
@@ -364,5 +376,107 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add recipientMessage
+     *
+     * @param \Swap\PlatformBundle\Entity\Message $recipientMessage
+     *
+     * @return User
+     */
+    public function addRecipientMessage(\Swap\PlatformBundle\Entity\Message $recipientMessage)
+    {
+        $this->recipientMessage[] = $recipientMessage;
+
+        return $this;
+    }
+
+    /**
+     * Remove recipientMessage
+     *
+     * @param \Swap\PlatformBundle\Entity\Message $recipientMessage
+     */
+    public function removeRecipientMessage(\Swap\PlatformBundle\Entity\Message $recipientMessage)
+    {
+        $this->recipientMessage->removeElement($recipientMessage);
+    }
+
+    /**
+     * Get recipientMessage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecipientMessage()
+    {
+        return $this->recipientMessage;
+    }
+
+    /**
+     * Add reservationsMade
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $reservationsMade
+     *
+     * @return User
+     */
+    public function addReservationsMade(\Swap\PlatformBundle\Entity\Reservation $reservationsMade)
+    {
+        $this->reservationsMade[] = $reservationsMade;
+
+        return $this;
+    }
+
+    /**
+     * Remove reservationsMade
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $reservationsMade
+     */
+    public function removeReservationsMade(\Swap\PlatformBundle\Entity\Reservation $reservationsMade)
+    {
+        $this->reservationsMade->removeElement($reservationsMade);
+    }
+
+    /**
+     * Get reservationsMade
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getReservationsMade()
+    {
+        return $this->reservationsMade;
+    }
+
+    /**
+     * Add reservationsMade
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $userReservation
+     *
+     * @return User
+     */
+    public function addUserReservation(\Swap\PlatformBundle\Entity\Reservation $userReservation)
+    {
+        $this->userReservation[] = $userReservation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userReservation
+     *
+     * @param \Swap\PlatformBundle\Entity\Reservation $userReservation
+     */
+    public function removeUserReservation(\Swap\PlatformBundle\Entity\Reservation $userReservation)
+    {
+        $this->userReservation->removeElement($userReservation);
+    }
+
+    /**
+     * Get userReservation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserReservation()
+    {
+        return $this->userReservation;
     }
 }

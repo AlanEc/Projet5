@@ -9,6 +9,8 @@
 		<div class="col-md-3 col-md-offset-1">
 			<div class="panel-body shadow Compte">
 				<img class="img-responsive" src="{{asset('bundles/swapplatform/images/silhouette.png') }}">
+				<p>{{ user.username }}</p>
+				<p>Ma swapBank : {{ user.swapBank }}
 				<a href="{{ path('swap_platform_profil') }}">
 					<button id="boutonProfil" class="btn btn-primary text-center col-md-12">Modifier mon profil</button>
 				</a>
@@ -19,7 +21,7 @@
 				<a href="{{ path('swap_ajouter_service') }}">
 					<button class="btn btn-primary raleway400 text-center col-xs-94 col-xs-offset-1">Ajouter un Swap</button>
 				</a>
-				<a href="">
+				<a href="{{path('swap_manage_swap') }}">
 					<button class="btn btn-primary raleway400 text-center col-xs-94 col-xs-offset-1">Gérer mes swaps</button>
 				</a>
 			</div>
@@ -39,14 +41,13 @@
 				<div class="col-md-12">
 					<div class="panel-body shadow Compte">
 						<span class="titreCompte"><p>Prochains services que vous allez recevoir</p><span>
-						<hr>
 						<table>
 						<thead>
 							<tr>
-								<th>Statut</th>
-								<th>Date/Service</th>
-								<th>Membre</th>
-								<th>Détails</th>
+								<td>Statut</td>
+								<td>Date/Service</td>
+								<td>Membre</td>
+								<td>Détails</td>
 							</tr>
 						</thead>
 						{% for reservation in reservations %}
@@ -55,8 +56,8 @@
 									<td></td>
 									<td>
 										{{ reservation.service.categorie }}</br>
-										Du : {{ reservation.dateArrival }}</br>
-										Au : {{ reservation.dateDeparture }}
+										Du : </br>
+										Au :
 									</td>
 									<td>
 										{{ reservation.service.user.username }}
@@ -71,7 +72,32 @@
 				<div class="col-md-12">
 					<div class="panel-body shadow Compte">
 						<span class="titreCompte"><p>Prochains service que allez rendre</p><span>
-						<hr>
+						<table>
+						<thead>
+							<tr>
+								<td>Statut</td>
+								<td>Date/Service</td>
+								<td>Membre</td>
+								<td>Détails</td>
+							</tr>
+						</thead>
+						{% for serviceToRender in servicesToRender %}
+							<tbody>
+								<tr>
+									<td></td>
+									<td>
+										{{ serviceToRender.service.categorie }}</br>
+										Du :  </br>
+										Au : 
+									</td>
+									<td>
+										{{ serviceToRender.userReservation.username }}
+									</td>
+									<td>Détails</td>
+								</tr>
+							</tbody>
+						{% endfor %}
+						</table>
 				</div>
 			<div class="row">
 				<div class="col-md-12">
