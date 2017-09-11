@@ -70,6 +70,12 @@ class Service
     private $swapPoints;
 
     /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\DeletedDate", mappedBy="service", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $deletedDates;
+
+    /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="service", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
@@ -296,5 +302,39 @@ class Service
     public function getSwapPoints()
     {
         return $this->swapPoints;
+    }
+
+    /**
+     * Add deletedDate
+     *
+     * @param \Swap\PlatformBundle\Entity\DeletedDate $deletedDate
+     *
+     * @return Service
+     */
+    public function addDeletedDate(\Swap\PlatformBundle\Entity\DeletedDate $deletedDate)
+    {
+        $this->deletedDates[] = $deletedDate;
+
+        return $this;
+    }
+
+    /**
+     * Remove deletedDate
+     *
+     * @param \Swap\PlatformBundle\Entity\DeletedDate $deletedDate
+     */
+    public function removeDeletedDate(\Swap\PlatformBundle\Entity\DeletedDate $deletedDate)
+    {
+        $this->deletedDates->removeElement($deletedDate);
+    }
+
+    /**
+     * Get deletedDates
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDeletedDates()
+    {
+        return $this->deletedDates;
     }
 }

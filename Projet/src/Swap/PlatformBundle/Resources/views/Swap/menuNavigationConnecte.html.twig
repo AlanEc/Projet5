@@ -7,7 +7,10 @@
       <a class="navbar-brand" href="#">SwapTravel</a>
     </div>
     <form class="navbar-form navbar-left searchnavbar" role="search" method="get" id="searchFormNav" action="{{ path('swap_search') }}">
-      <input id="adresse" class="controls" type="text">
+      <div class="form-group input-group">
+        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search colorblue"></span></span>
+        <input id="adresse" class="form-control input-md controls" type="text">
+      </div>
       <input type="submit"/>  
     </form>
     {{ app.user.username }}

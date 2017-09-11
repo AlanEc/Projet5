@@ -22,7 +22,7 @@
 				{% for service in services %}
 				<div class="row">
 					<div class="col-md-offset-1 col-md-10">
-						<a href="{{ path('swap_calendar', { 'service': service }) }}">
+						<a href="{{ path('swap_calendar', { 'serviceId': service.id }) }}">
 							<div id="mySwap" class="panel panel-default">
 								<div class="row">
 									<div class="col-md-5 col-md-offset-1 mySwaps">

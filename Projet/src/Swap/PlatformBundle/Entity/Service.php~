@@ -70,6 +70,12 @@ class Service
     private $swapPoints;
 
     /**
+     * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\DeletedDate", mappedBy="service", cascade={"persist"}))
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $deletedDates;
+
+    /**
      * @ORM\OneToMany(targetEntity="Swap\PlatformBundle\Entity\Reservation", mappedBy="service", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=true)
      */
@@ -272,5 +278,29 @@ class Service
     public function getReservations()
     {
         return $this->reservations;
+    }
+
+    /**
+     * Set swapPoints
+     *
+     * @param string $swapPoints
+     *
+     * @return Service
+     */
+    public function setSwapPoints($swapPoints)
+    {
+        $this->swapPoints = $swapPoints;
+
+        return $this;
+    }
+
+    /**
+     * Get swapPoints
+     *
+     * @return string
+     */
+    public function getSwapPoints()
+    {
+        return $this->swapPoints;
     }
 }

@@ -5,11 +5,13 @@ namespace Swap\PlatformBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Swap\PlatformBundle\Entity\Serivce;
 use Swap\PlatformBundle\Form\ServiceType;
+use Swap\PlatformBundle\Form\DeletedDateType;
 use Swap\PlatformBundle\Form\ServiceDetailsType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Swap\PlatformBundle\Entity\Service;
+use Swap\PlatformBundle\Entity\DeletedDate;
 use Swap\UserBundle\Entity\User;
 
 class SwapController extends Controller
@@ -84,10 +86,44 @@ class SwapController extends Controller
       ));
     }
 
-    public function manageCalendarAction()
+    public function manageCalendarAction($serviceId, Request $request)
     {
-      return $this->render('SwapPlatformBundle:Swap:calendar.html.twig', array(
+      $deletedDate = new DeletedDate;
+      $formBuilder = $this->get('form.factory')->create(DeletedDateType::class, $deletedDate);
+      $form = $this->container->get('Swap_form.FormCreator');
+      $creationForm = $form->creation($formBuilder, $request, $deletedDate);
 
+      $user = $this->getUser();
+      $repository = $this
+      ->getDoctrine()
+      ->getManager()
+      ->getRepository('SwapPlatformBundle:Service')
+      ;
+
+      $service = $repository->find($serviceId); 
+
+      if ($formBuilder->isValid()) { 
+        $em = $this->getDoctrine()->getManager();
+        $service->addDeletedDate($deletedDate);
+        $deletedDate->setService($service);
+        $em->persist($deletedDate);
+        $em->flush();
+      }
+$max = sizeof($service->getDeletedDates());
+      for($i = 0; $i < $max;$i++)
+      {
+          $date = $service->getDeletedDates()[$i]->getDeletedDate();
+          $allDeletedDates[$i] = $date;
+    
+      }
+//  var_dump($deletedDate->getDeletedDate());
+
+// var_dump($service->getDeletedDates()[18]->getDeletedDate());
+      return $this->render('SwapPlatformBundle:Swap:calendar.html.twig', array(
+        'form' => $formBuilder->createView(),
+        'user' => $user,
+        'service' => $service,
+        'allDeletedDates' => $allDeletedDates,
       ));
     }
 }
