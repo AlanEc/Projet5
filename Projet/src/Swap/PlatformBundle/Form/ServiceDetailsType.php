@@ -36,6 +36,12 @@ class ServiceDetailsType extends AbstractType
                '8' => '8' ))
         )
         ->add('adresse', TextType::class)
+        ->add('longitude', TextType::class, array(
+            'label' => false
+        ))
+        ->add('lattitude', TextType::class, array(
+            'label' => false
+        ))
         ->add('save', SubmitType::class);
     }
     

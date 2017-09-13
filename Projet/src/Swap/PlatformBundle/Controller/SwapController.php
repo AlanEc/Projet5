@@ -12,6 +12,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Swap\PlatformBundle\Entity\Service;
 use Swap\PlatformBundle\Entity\DeletedDate;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Swap\UserBundle\Entity\User;
 
 class SwapController extends Controller
@@ -62,7 +66,7 @@ class SwapController extends Controller
   		));
    	}
 
-    public function searchAction()
+    public function searchAction(Request $request)
     {
       $repository = $this
       ->getDoctrine()
@@ -72,8 +76,78 @@ class SwapController extends Controller
 
       $listSwaps = $repository->findAll();
 
+      $defaultData = array('message' => 'Type your message here');
+      $form = $this->createFormBuilder($defaultData)
+        ->add('dateArrival', TextType::class, array(
+          'label' => 'Du : '
+         ))
+        ->add('dateDeparture', TextType::class, array(
+          'label' => 'Au  : '
+         ))
+        ->add('dateDeparture', TextType::class, array(
+          'label' => 'Au  : '
+         ))
+        ->add('numberPersons', ChoiceType::class, array(
+          'label' => false,
+          'choices' => array(
+             '1 voyageur' => '1',
+             '2 voyageur' => '2',
+             '3 voyageur' => '3',
+             '4 voyageur' => '4',
+             '5 voyageurs et plus' => '5'
+        )))
+        ->add('meal', CheckboxType::class, array(
+          'label'    => 'Repas ',
+          'required' => false,
+        ))
+        ->add('accomodation', CheckboxType::class, array(
+          'label'    => 'Herbergement ',
+          'required' => false,
+        ))
+        ->add('filtrer', SubmitType::class)
+        ->getForm();
+
+      $form->handleRequest($request);
+
+      if ($form->isSubmitted() && $form->isValid()) {
+        $repository = $this
+        ->getDoctrine()
+        ->getManager()
+        ->getRepository('SwapPlatformBundle:Service')
+        ;
+
+        $data = $form->getData();
+
+        if ($data['meal'] == true ) {
+          $meal = "Repas";
+        }
+        else {
+          $meal = ''; 
+        }
+        if ($data['accomodation'] == true) {
+          $accomodation = "Hebergement";
+        } else { 
+          $accomodation = "";
+        } 
+        if ($data['accomodation'] == true) {
+         $listSwaps = $repository->findBy(
+          array('nombrePersonnes' => $data['numberPersons'], 'categorie' => $accomodation)        
+        );
+        }
+        if ($data['meal'] == true) {
+        $listSwaps = $repository->findBy(
+        array('nombrePersonnes' => $data['numberPersons'], 'categorie' => $meal)        
+        );
+        } else {
+          $listSwaps = $repository->findBy(
+          array('nombrePersonnes' => $data['numberPersons'])        
+        ); 
+        }
+      }
+
     	return $this->render('SwapPlatformBundle:Service:searchSwap.html.twig', array(
-      'listSwaps' => $listSwaps
+      'listSwaps' => $listSwaps,
+      'form' => $form->createView()
       ));
    	}
 
@@ -109,7 +183,7 @@ class SwapController extends Controller
         $em->persist($deletedDate);
         $em->flush();
       }
-$max = sizeof($service->getDeletedDates());
+      $max = sizeof($service->getDeletedDates());
       for($i = 0; $i < $max;$i++)
       {
           $date = $service->getDeletedDates()[$i]->getDeletedDate();

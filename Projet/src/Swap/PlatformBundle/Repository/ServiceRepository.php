@@ -10,4 +10,19 @@ namespace Swap\PlatformBundle\Repository;
  */
 class ServiceRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function swapRecovery($data) {
+		$qb = $this->createQueryBuilder('m');
+
+		$qb
+		->where('m.parentId is null')
+		->andWhere($qb->expr()->orX(
+		$qb->expr()->eq('m.author', $idUser),
+		$qb->expr()->eq('m.recipient', $idUser)
+		))
+		;
+
+		return $qb
+		->getQuery()
+		->getResult();
+	}
 }

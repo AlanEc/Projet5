@@ -1,17 +1,17 @@
 
 <script>
-var date;
-date = {{(allDeletedDates|json_encode|raw)}};
-for (var i = 0; i < date.length; i++){
-var tab = [];
-tab = "'" + date[i] + "'";
-}
+// var date;
+
+// for (var i = 0; i < date.length; i++){
+// var tab = [];
+// tab = "'" + date[i] + "'";
+// }
 $('.multi-select-calender').pignoseCalendar({
 	multiple: true,
 	lang: 'fr',
 	week: 1,
 	// format: 'DD-MM-YYYY',
-	disabledDates: [tab],
+	disabledDates: [],
 	select: function(date, obj) { 
 		obj.calendar.parent().next().show().text('Vous avez seléctionné la date du : ' + 
 			(date[0] === null? 'Aucune date séléctionnée':date[0].format('DD-MM-YYYY')) +
@@ -28,6 +28,5 @@ $('.multi-select-calender').pignoseCalendar({
 			});
 		});	
 	}
-
 });
 </script>

@@ -58,6 +58,20 @@ class Service
     /**
      * @var string
      *
+     * @ORM\Column(name="longitude", type="string", length=255, nullable=true)
+     */
+    private $longitude;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lattitude", type="string", length=255, nullable=true)
+     */
+    private $lattitude;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="vegetarien", type="string", length=255, nullable=true)
      */
     private $vegetarien;
@@ -336,5 +350,53 @@ class Service
     public function getDeletedDates()
     {
         return $this->deletedDates;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return Service
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set lattitude
+     *
+     * @param string $lattitude
+     *
+     * @return Service
+     */
+    public function setLattitude($lattitude)
+    {
+        $this->lattitude = $lattitude;
+
+        return $this;
+    }
+
+    /**
+     * Get lattitude
+     *
+     * @return string
+     */
+    public function getLattitude()
+    {
+        return $this->lattitude;
     }
 }
