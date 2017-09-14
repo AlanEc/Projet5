@@ -86,10 +86,11 @@ class Reservation
 
     public function resaStatus() {
         $date = new \Datetime();
+        if ($this->dateDeparture > $date){
+            $this->setStatus(self::RESA_ACCEPTED);
+        }
         if ($this->dateDeparture < $date) {
             $this->setStatus(self::OLD_RESA);
-        } if ($this->dateDeparture > $date){
-            $this->setStatus(self::RESA_ACCEPTED);
         }
     }
 
@@ -125,7 +126,7 @@ class Reservation
     public function getStatus()
     {
         $this->resaStatus();
-        // return $this->status;
+        return $this->status;
     }
 
     /**

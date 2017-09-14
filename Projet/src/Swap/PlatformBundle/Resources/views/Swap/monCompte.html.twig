@@ -51,21 +51,22 @@
 							</tr>
 						</thead>
 						{% for reservation in reservations %}
-							<tbody>
-								<tr>
-									<td></td>
-									<td>
-										{{ reservation.service.categorie }}</br>
-										Du : </br>
-										Au :
-									</td>
-									<td>
-										{{ reservation.service.user.username }}
-										{{ reservation.status }}
-									</td>
-									<td>Détails</td>
-								</tr>
-							</tbody>
+							{% if reservation.status == 1 %}
+								<tbody>
+									<tr>
+										<td></td>
+										<td>
+											{{ reservation.service.categorie }}</br>
+											Du : </br>
+											Au :
+										</td>
+										<td>
+											{{ reservation.service.user.username }}
+										</td>
+										<td>Détails</td>
+									</tr>
+								</tbody>
+							{% endif %}
 						{% endfor %}
 						</table>
 				</div>
