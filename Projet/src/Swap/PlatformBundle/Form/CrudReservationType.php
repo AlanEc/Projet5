@@ -5,28 +5,15 @@ namespace Swap\PlatformBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ReservationType extends AbstractType
+class CrudReservationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-        ->add('dateArrival', DateType::class, array(
-            'label' => 'Du',
-            'html5' => false,
-            'widget' => 'single_text',
-        ))
-        ->add('dateDeparture', DateType::class, array(
-            'label' => 'Au',
-            'html5' => false,
-            'widget' => 'single_text',
-        ))
-        ->add('save', SubmitType::class);
+        $builder->add('dateDeparture')->add('dateArrival')->add('totalSwapPoints')->add('status')->add('userReservation')->add('userService')->add('service');
     }
     
     /**
@@ -38,4 +25,14 @@ class ReservationType extends AbstractType
             'data_class' => 'Swap\PlatformBundle\Entity\Reservation'
         ));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'swap_platformbundle_reservation';
+    }
+
+
 }
