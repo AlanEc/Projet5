@@ -50,6 +50,13 @@ class Reservation
     private $totalSwapPoints;
 
     /**
+     * @var status
+     *
+     * @ORM\Column(name="status", type="string", length=255)
+     */
+    private $status;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -67,6 +74,24 @@ class Reservation
      * @ORM\JoinColumn(nullable=true)
      */
     private $service;
+
+    const RESA_WAITING = 0;
+    const RESA_ACCEPTED = 1;
+    const OLD_RESA = 2;
+
+    public function __construct() 
+    {
+        $this->resaStatus();
+    }
+
+    public function resaStatus() {
+        $date = new \Datetime();
+        if ($this->dateDeparture < $date) {
+            $this->setStatus(self::OLD_RESA);
+        } if ($this->dateDeparture > $date){
+            $this->setStatus(self::RESA_ACCEPTED);
+        }
+    }
 
     /**
      * Get id
@@ -87,9 +112,9 @@ class Reservation
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        $this->status = $status;       
 
-        return $this;
+        return $this; 
     }
 
     /**
@@ -99,7 +124,8 @@ class Reservation
      */
     public function getStatus()
     {
-        return $this->status;
+        $this->resaStatus();
+        // return $this->status;
     }
 
     /**
@@ -124,7 +150,6 @@ class Reservation
     public function getDateDeparture()
     {
         return $this->dateDeparture;
-;
     }
 
     /**

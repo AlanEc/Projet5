@@ -6,12 +6,15 @@
 // var tab = [];
 // tab = "'" + date[i] + "'";
 // }
+
+var date = '2017-09-25';
+
 $('.multi-select-calender').pignoseCalendar({
 	multiple: true,
 	lang: 'fr',
 	week: 1,
 	// format: 'DD-MM-YYYY',
-	disabledDates: [],
+	disabledDates: [date],
 	select: function(date, obj) { 
 		obj.calendar.parent().next().show().text('Vous avez seléctionné la date du : ' + 
 			(date[0] === null? 'Aucune date séléctionnée':date[0].format('DD-MM-YYYY')) +
@@ -20,9 +23,14 @@ $('.multi-select-calender').pignoseCalendar({
 			'');
 		$(document).ready(function(){
 			$("button").click(function(){
-				if (date[1] !== null) {
-					$("input:text").val(date[1].format('YYYY-MM-DD') + date[1].format('YYYY-MM-DD'));
-				} else {
+				if (date[1] && date[0] !== null) {
+					$("input:text").val(date[0].format('YYYY-MM-DD\' ') + date[1].format('\'YYYY-MM-DD'));
+				} 
+				else if (date[1] !== null) {
+					$("input:text").val(date[1].format('YYYY-MM-DD'));
+				}
+
+				else {
 					$("input:text").val(date[0].format('YYYY-MM-DD'));
 				}					
 			});

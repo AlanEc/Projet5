@@ -183,16 +183,19 @@ class SwapController extends Controller
         $em->persist($deletedDate);
         $em->flush();
       }
-      $max = sizeof($service->getDeletedDates());
-      for($i = 0; $i < $max;$i++)
-      {
-          $date = $service->getDeletedDates()[$i]->getDeletedDate();
-          $allDeletedDates[$i] = $date;
-    
-      }
-//  var_dump($deletedDate->getDeletedDate());
 
-// var_dump($service->getDeletedDates()[18]->getDeletedDate());
+      $max = sizeof($service->getDeletedDates());
+      if ($max >= 1 ) {
+        for($i = 0; $i < $max;$i++)
+        {
+            $date = $service->getDeletedDates()[$i]->getDeletedDate();
+            $allDeletedDates[$i] = $date;
+     
+        } 
+      } else {
+         $allDeletedDates = null;
+      }
+
       return $this->render('SwapPlatformBundle:Swap:calendar.html.twig', array(
         'form' => $formBuilder->createView(),
         'user' => $user,
