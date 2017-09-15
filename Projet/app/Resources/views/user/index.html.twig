@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Users list</h1>
-
-    <table>
         <thead>
             <tr>
                 <th>Id</th>
@@ -15,6 +12,7 @@
                 <th>Description</th>
                 <th>Verificationmotdepasse</th>
                 <th>Actions</th>
+                <th><a href="{{ path('user_new') }}">Create a new user</a></th>
             </tr>
         </thead>
         <tbody>
@@ -41,11 +39,5 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Create a new user</a>
-        </li>
-    </ul>
 {% endblock %}

@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Services list</h1>
-
-    <table>
         <thead>
             <tr>
                 <th>Id</th>
@@ -16,6 +13,7 @@
                 <th>Vegetarien</th>
                 <th>Swappoints</th>
                 <th>Actions</th>
+                <th><a href="{{ path('service_new') }}">Create a new service</a></th>
             </tr>
         </thead>
         <tbody>
@@ -43,11 +41,4 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('service_new') }}">Create a new service</a>
-        </li>
-    </ul>
 {% endblock %}

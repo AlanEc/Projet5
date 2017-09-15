@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Reservations list</h1>
-
-    <table>
         <thead>
             <tr>
                 <th>Id</th>
@@ -12,6 +9,7 @@
                 <th>Totalswappoints</th>
                 <th>Status</th>
                 <th>Actions</th>
+                <th><a href="{{ path('reservation_new') }}">Create a new reservation</a></th>
             </tr>
         </thead>
         <tbody>
@@ -35,11 +33,5 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('reservation_new') }}">Create a new reservation</a>
-        </li>
-    </ul>
 {% endblock %}

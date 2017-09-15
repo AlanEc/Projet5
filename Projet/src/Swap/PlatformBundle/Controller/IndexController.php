@@ -17,4 +17,19 @@ class IndexController extends Controller
     {
         return $this->render('SwapPlatformBundle:Swap:index.html.twig');
     }
+
+    public function AdminAction()
+    {
+    	$em = $this->getDoctrine()->getManager();
+
+        $reservations = $em->getRepository('SwapPlatformBundle:Reservation')->findAll();
+        $services = $em->getRepository('SwapPlatformBundle:Service')->findAll();
+        $users = $em->getRepository('SwapUserBundle:User')->findAll();
+
+        return $this->render('SwapPlatformBundle:Admin:admin.html.twig', array(
+            'reservations' => $reservations,
+            'services' => $services,
+            'users' => $users,
+        ));
+    }
 }

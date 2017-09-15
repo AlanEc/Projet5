@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  * User controller.
  *
  */
-class UserController extends Controller
+class CrudUserController extends Controller
 {
     /**
      * Lists all user entities.
