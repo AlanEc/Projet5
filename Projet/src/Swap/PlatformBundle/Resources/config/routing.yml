@@ -2,6 +2,10 @@ swap_platform_reservation:
     resource: "@SwapPlatformBundle/Resources/config/routing/reservation.yml"
     prefix:   /reservation
 
+swap_platform_reservation:
+    resource: "@SwapPlatformBundle/Resources/config/routing/service.yml"
+    prefix:   /service
+
 swap_platform_homepage:
     path:     /
     defaults: { _controller: SwapPlatformBundle:Index:display }
