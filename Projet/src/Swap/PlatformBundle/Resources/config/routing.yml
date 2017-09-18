@@ -65,3 +65,7 @@ swap_mail_box:
 swap_message_conversation:
     path:     /message-conversation/{serviceId}/{idMessage}/{recipientId}
     defaults: { _controller: SwapPlatformBundle:Message:conversation}
+
+swap_notification_delete:
+    path:     /delete-notification/{id}
+    defaults: { _controller: SwapPlatformBundle:Notification:delete}

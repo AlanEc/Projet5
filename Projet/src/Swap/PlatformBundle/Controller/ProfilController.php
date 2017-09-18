@@ -16,15 +16,17 @@ class ProfilController extends Controller
 {
   public function accountAction()
   {
-  	$session = new Session();
-  	$idMembre = $session->get('id');
+  	// $session = new Session();
+  	// $idMembre = $session->get('id');
     $user = $this->getUser(); 
+    $date = new \Datetime();
 
 // var_dump($reservationToRender[0]->getService()->getUser()->getId());
     return $this->render('SwapPlatformBundle:Swap:monCompte.html.twig', array(
     'user' => $user,
     'reservations' => $user->getReservationsMade(),
     'servicesToRender' => $user->getUserReservation(),
+    'date' => $date
     ));
   }
 

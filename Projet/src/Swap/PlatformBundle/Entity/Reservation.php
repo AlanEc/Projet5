@@ -78,6 +78,7 @@ class Reservation
     const RESA_WAITING = 0;
     const RESA_ACCEPTED = 1;
     const OLD_RESA = 2;
+    const DELETE_STATUS = 3;
 
     public function __construct() 
     {
@@ -93,6 +94,12 @@ class Reservation
             $this->setStatus(self::OLD_RESA);
         }
     }
+
+    public function DeleteNotification() {
+        $status = '3';
+        $this->setStatus($status);
+    }
+
 
     /**
      * Get id
@@ -125,7 +132,6 @@ class Reservation
      */
     public function getStatus()
     {
-        $this->resaStatus();
         return $this->status;
     }
 
