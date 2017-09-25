@@ -6,10 +6,10 @@
       </button>
       <a class="navbar-brand" href="#">SwapTravel</a>
     </div>
-    <form class="navbar-form navbar-left searchnavbar" role="search" method="get" id="searchFormNav" action="{{ path('swap_search') }}">
+    <form class="navbar-form navbar-left searchnavbar" role="search" method="post" id="searchFormNav" action="{{ path('swap_search') }}">
       <div class="form-group input-group">
         <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search colorblue"></span></span>
-        <input id="adresse" class="form-control input-md controls" type="text">
+        <input id="adresse" name="adresse" class="form-control input-md controls" type="text">
       </div>
       <input type="submit"/>  
     </form>

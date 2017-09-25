@@ -74,7 +74,14 @@ class SwapController extends Controller
       ->getRepository('SwapPlatformBundle:Service')
       ;
 
-      $listSwaps = $repository->findAll();
+      if(isset($_POST['adresse'])){
+        $adresse = $_POST['adresse'];
+        $listSwaps = $repository->findBy(
+        array('adresse' => $adresse)        
+        );
+      } else {
+        $adresse = "";
+      }
 
       $defaultData = array('message' => 'Type your message here');
       $form = $this->createFormBuilder($defaultData)
@@ -147,7 +154,8 @@ class SwapController extends Controller
 
     	return $this->render('SwapPlatformBundle:Service:searchSwap.html.twig', array(
       'listSwaps' => $listSwaps,
-      'form' => $form->createView()
+      'form' => $form->createView(),
+      'adresse' => $adresse,
       ));
    	}
 
@@ -188,9 +196,14 @@ class SwapController extends Controller
       if ($max >= 1 ) {
         for($i = 0; $i < $max;$i++)
         {
-            $date = $service->getDeletedDates()[$i]->getDeletedDate();
-            $allDeletedDates[$i] = $date;
-     
+          $minDate = $service->getDeletedDates()[$i]->getMinDate();
+          $maxDate = $service->getDeletedDates()[$i]->getMaxDate();
+          if ( $minDate != null) {
+            $rangeDate = $minDate;
+            $allDeletedDates[$i] = $rangeDate;
+          } else {
+            $date = $minDate;
+          }
         } 
       } else {
          $allDeletedDates = null;
@@ -200,7 +213,7 @@ class SwapController extends Controller
         'form' => $formBuilder->createView(),
         'user' => $user,
         'service' => $service,
-        'allDeletedDates' => $allDeletedDates,
+        // 'allDeletedDates' => $allDeletedDates,
       ));
     }
 }

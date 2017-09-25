@@ -46,6 +46,9 @@ class ReservationController extends Controller
 			$em->flush(); 
 		}
 
+		$message = $this->container->get('swap_message.Message');
+   		$message->constructionMessage($reservation);
+
 		return $this->render('SwapPlatformBundle:Service:focusSwap.html.twig', array(
 		'service' => $service,
 		'form' => $formBuilder->createView(),

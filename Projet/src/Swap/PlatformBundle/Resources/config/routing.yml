@@ -69,3 +69,7 @@ swap_message_conversation:
 swap_notification_delete:
     path:     /delete-notification/{id}
     defaults: { _controller: SwapPlatformBundle:Notification:delete}
+
+swap_send_comment:
+    path:     /send-comment/{id}
+    defaults: { _controller: SwapPlatformBundle:Comment:send}

@@ -16,8 +16,13 @@ class DeletedDateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('deletedDate', TextType::class, array(
-            'label' => false
+        ->add('minDate', TextType::class, array(
+            'label' => false,
+            'required' =>false
+        ))
+        ->add('maxDate', TextType::class, array(
+            'label' => false,
+            'required' =>false
         ))
         ->add('save', SubmitType::class, array(
             'label' => 'Désactiver'

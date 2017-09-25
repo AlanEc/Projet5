@@ -25,7 +25,8 @@
 					{{ form_start(form) }}
 					{# Les erreurs générales du formulaire. #}
 					{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
-					{{ form_row(form.deletedDate, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.minDate, { 'attr': { 'class' : 'form-control' }} ) }}
+					{{ form_row(form.maxDate, { 'attr': { 'class' : 'form-control' }} ) }}
 					{{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-default' }} ) }}
 					{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
 				</div>

@@ -6,6 +6,9 @@ services:
         class: Swap\PlatformBundle\Services\CalculPoints
     Swap_form.Filter:
         class: Swap\PlatformBundle\Form\FormFilter
+    Swap_message.Message:
+        class: Swap\PlatformBundle\Services\Message
+        arguments: ["@mailer", "@templating"] 
 
 
     

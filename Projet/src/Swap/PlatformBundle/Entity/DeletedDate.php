@@ -24,9 +24,16 @@ class DeletedDate
     /**
      * @var string
      *
-     * @ORM\Column(name="deletedDate", type="string", nullable=true)
+     * @ORM\Column(name="minDate", type="string", nullable=true)
      */
-    private $deletedDate;
+    private $minDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="maxDate", type="string", nullable=true)
+     */
+    private $maxDate;
 
     /**
      * @ORM\ManyToOne(targetEntity="Swap\PlatformBundle\Entity\Service",inversedBy="deletedDates")
@@ -42,30 +49,6 @@ class DeletedDate
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set deletedDate
-     *
-     * @param string $deletedDate
-     *
-     * @return DeletedDate
-     */
-    public function setDeletedDate($deletedDate)
-    {
-        $this->deletedDate = $deletedDate;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedDate
-     *
-     * @return string
-     */
-    public function getDeletedDate()
-    {
-        return $this->deletedDate;
     }
 
     /**
@@ -90,5 +73,53 @@ class DeletedDate
     public function getService()
     {
         return $this->service;
+    }
+
+    /**
+     * Set minDate
+     *
+     * @param string $minDate
+     *
+     * @return DeletedDate
+     */
+    public function setMinDate($minDate)
+    {
+        $this->minDate = $minDate;
+
+        return $this;
+    }
+
+    /**
+     * Get minDate
+     *
+     * @return string
+     */
+    public function getMinDate()
+    {
+        return $this->minDate;
+    }
+
+    /**
+     * Set maxDate
+     *
+     * @param string $maxDate
+     *
+     * @return DeletedDate
+     */
+    public function setMaxDate($maxDate)
+    {
+        $this->maxDate = $maxDate;
+
+        return $this;
+    }
+
+    /**
+     * Get maxDate
+     *
+     * @return string
+     */
+    public function getMaxDate()
+    {
+        return $this->maxDate;
     }
 }
