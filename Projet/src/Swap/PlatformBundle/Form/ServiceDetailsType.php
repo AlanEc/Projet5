@@ -36,6 +36,12 @@ class ServiceDetailsType extends AbstractType
                '8' => '8' ))
         )
         ->add('adresse', TextType::class)
+        ->add('country', TextType::class, array(
+            'label' => false
+        ))
+        ->add('city', TextType::class, array(
+            'label' => false
+        ))
         ->add('longitude', TextType::class, array(
             'label' => false
         ))

@@ -58,6 +58,20 @@ class Service
     /**
      * @var string
      *
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
+     */
+    private $country;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="longitude", type="string", length=255, nullable=true)
      */
     private $longitude;
@@ -398,5 +412,53 @@ class Service
     public function getLattitude()
     {
         return $this->lattitude;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Service
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Service
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

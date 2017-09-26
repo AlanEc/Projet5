@@ -1,13 +1,6 @@
 
 <script>
 function initialize() {
-  var input1 = document.getElementById('service_details_adresse');               
-  var autocomplete1 = new google.maps.places.Autocomplete(input1);
-  autocomplete1.addListener('place_changed', function() {
-    var place1 = autocomplete1.getPlace();
-    document.getElementById('service_details_longitude').value = place1.geometry.location.lng();
-    document.getElementById('service_details_lattitude').value = place1.geometry.location.lat();
-  });
 
   var input = document.getElementById('adresse');  
   var autocomplete = new google.maps.places.Autocomplete(input);
