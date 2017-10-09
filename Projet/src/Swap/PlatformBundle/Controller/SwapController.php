@@ -9,7 +9,9 @@ use Swap\PlatformBundle\Form\DeletedDateType;
 use Swap\PlatformBundle\Form\ServiceDetailsType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Swap\PlatformBundle\Entity\Service;
 use Swap\PlatformBundle\Entity\DeletedDate;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -68,6 +70,7 @@ class SwapController extends Controller
 
     public function searchAction(Request $request)
     {
+
       $repository = $this
       ->getDoctrine()
       ->getManager()
@@ -75,14 +78,14 @@ class SwapController extends Controller
       ;
 
       if(isset($_POST['adresse'])){
-        $adresse = $_POST['adresse'];
+      $adresse = $_POST['adresse'];
         $listSwaps = $repository->findBy(
-        array('adresse' => $adresse)        
+        array('city' => $adresse)        
         );
       } else {
         $adresse = "";
       }
-
+  $listSwaps = $repository->findAll();
       $defaultData = array('message' => 'Type your message here');
       $form = $this->createFormBuilder($defaultData)
         ->add('dateArrival', TextType::class, array(
@@ -216,4 +219,31 @@ class SwapController extends Controller
         // 'allDeletedDates' => $allDeletedDates,
       ));
     }
-}
+
+     public function ajaxAction(Request $request)
+    {
+      if ($request->isXmlHttpRequest()) {
+        $data = $request->get('data');
+        $services = $this->getDoctrine()
+        ->getRepository(Service::class)
+        ->serviceRecovery($data);
+
+        if ($services) {
+          foreach ($services as $service) {
+            var_dump($service);
+            $output[] = array('service' => $service->getLatttitude());
+          }
+          return new JsonResponse($output);
+        } 
+
+        else {
+          return new JsonResponse(array('error' => 'true'));
+        }
+
+      }
+
+      else {
+        throw new NotFoundHttpException('Ce n\'est pas une requette ajax');
+      }
+    }
+  }

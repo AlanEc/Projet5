@@ -31,21 +31,28 @@ function initialize() {
     zoneMarqueurs.extend( marqueur.getPosition() );
   }
 
-  autocomplete.addListener('place_changed', function() {
-  var place = autocomplete.getPlace();
-  if (!place.geometry) {
-    window.alert("No details available for input: '" + place.name + "'");
-    return;
-  }
+  
+  google.maps.event.addListener(map, 'idle', function() {
+    var bounds = map.getBounds();
+    var swPoint = bounds.getSouthWest();
+    var nePoint = bounds.getNorthEast();
+ 
+    var swLat = swPoint.lat();
+    var swLng = swPoint.lng();
+    var neLat = nePoint.lat();
+    var neLng = nePoint.lng();
+ 
+    var data = [swLat, swLng, neLat, neLng];
+    console.log(data);
+    $.ajax({
+    url : "{{path('ajax_search')}}",
+    type : 'POST', 
+    data : 'data=' + data,
+    success :function(data) {
 
-  if (place.geometry.viewport) {
-    map.fitBounds(place.geometry.viewport);
-  } else {
-    map.setCenter(place.geometry.location);
-    map.setZoom(17);  
-  }
-  });
-
+      }
+    });
+});
   var geocoder = new google.maps.Geocoder();
     var address = '{{ adresse }}';
 
@@ -54,10 +61,8 @@ geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
 
     map.setZoom(10);
-     map.setCenter(results[0].geometry.location);
-       map.fitBounds( zoneMarqueurs );
-
-
+    map.setCenter(results[0].geometry.location);
+    map.fitBounds( zoneMarqueurs );
 }
 
 });

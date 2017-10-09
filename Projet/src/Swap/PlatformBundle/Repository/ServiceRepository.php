@@ -25,4 +25,17 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
 		->getQuery()
 		->getResult();
 	}
+
+	public function serviceRecovery($data) {
+		$qb = $this->createQueryBuilder('m');
+
+		$qb
+		->andWhere('m.lattitude BETWEEN :lattitude1 AND :lattitude2')
+		->setParameter('lattitude1', $data[0])  
+		->setParameter('lattitude2', $data[3])
+		;
+
+		return $qb;
+	
+	}
 }

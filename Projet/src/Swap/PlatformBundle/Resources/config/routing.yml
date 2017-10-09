@@ -42,6 +42,10 @@ swap_search:
     path:     /rechercher-swap
     defaults: { _controller: SwapPlatformBundle:Swap:search }
 
+ajax_search:
+    path:     /ajax
+    defaults: { _controller: SwapPlatformBundle:Swap:ajax }
+
 swap_calendar:
     path:     /swap-calendrier/{serviceId}
     defaults: { _controller: SwapPlatformBundle:Swap:manageCalendar }

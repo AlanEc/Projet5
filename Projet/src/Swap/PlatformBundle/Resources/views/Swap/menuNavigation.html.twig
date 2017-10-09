@@ -9,7 +9,7 @@
         -
         <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
         {% else %}
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <li class=""><a data-toggle="modal" href="#myModal">Connexion</a></li>
         {% endif %}
       </ul>
     </div>
@@ -17,3 +17,4 @@
   </div>
 </nav>
 
+ 
