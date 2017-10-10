@@ -28,7 +28,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-body shadow Compte">
-					<span class="titreCompte"><p>Mes notifications</p><span>
+					<span class="titreCompte"><p>Mes notifications <span class="badge">{{ servicesToRender|length }}</span></p><span>
 					<hr>
 					{% for reservation in reservations %}
 						{% if reservation.dateDeparture < date %}
@@ -68,7 +68,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-body shadow Compte">
-						<span class="titreCompte"><p>Prochains services que vous allez recevoir</p><span>
+						<span class="titreCompte"><p>Prochains services que vous allez recevoir <span class="badge">{{ reservations|length }}</span></p><span>
 						<table>
 						<thead>
 							<tr>
@@ -99,7 +99,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-body shadow Compte">
-						<span class="titreCompte"><p>Prochains service que allez rendre</p><span>
+						<span class="titreCompte"><p>Prochains service que allez rendre <span class="badge">{{ servicesToRender|length }}</span></p><span>
 						<table>
 						<thead>
 							<tr>
@@ -145,6 +145,11 @@
 </div>
 			
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+	$('button').click(function(){
+	  $('.bg-info').toggle();
+	});
+</script>
 
 {% endblock %}
 

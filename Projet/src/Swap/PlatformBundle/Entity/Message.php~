@@ -40,7 +40,7 @@ class Message
      */
     private $recipient;
 
-      /**
+    /**
      * @var int
      *
      * @ORM\Column(name="parenId", type="integer", nullable=true)
@@ -60,6 +60,14 @@ class Message
      * @ORM\Column(name="Date", type="datetime")
      */
     private $date;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="comment", type="integer", nullable=true)
+     */
+    private $comment;
+
 
     public function __construct() 
     {
@@ -219,5 +227,29 @@ class Message
     public function getParentId()
     {
         return $this->parentId;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Message
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date->format('d-m-Y H:i:s');;
     }
 }

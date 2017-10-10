@@ -10,4 +10,17 @@ namespace Swap\PlatformBundle\Repository;
  */
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function reservationNb($idUser)
+    {
+		$qb = $this->createQueryBuilder('m');
+
+		$qb
+		->andWhere('m.status is :notification')
+		->setParameter('notification', '2')  
+		;
+
+		return $qb
+		->getQuery()
+		->getResult();
+	}
 }

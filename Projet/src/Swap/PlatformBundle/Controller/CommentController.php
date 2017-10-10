@@ -14,11 +14,27 @@ class CommentController extends Controller
 		$message = new Message();
     	$formBuilder = $this->get('form.factory')->create(MessageType::class, $message);
     	$form = $this->container->get('Swap_form.FormCreator');
+    	$creationForm = $form->creation($formBuilder, $request, $message);
+
+    	$user = $this->getUser();
+
+    	$repository = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('SwapPlatformBundle:reservation')
+		;
+
+		$reservation = $repository->findOneBy(
+			array('id' => $id));
+
+		$recipient = $reservation->getUserReservation();
 
     	if ($formBuilder->isValid()) { 
 			$message->setAuthor($user);
 			$message->setServiceId($id);
 			$message->setRecipient($recipient);
+			$message->setComment('1');
+			$reservation->setStatus('3');
 			$em = $this->getDoctrine()->getManager();
 		    $em->persist($message);
 			$em->flush(); 
