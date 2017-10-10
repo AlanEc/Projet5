@@ -57,6 +57,13 @@ class Reservation
     private $status;
 
     /**
+     * @var ReservationStatus
+     *
+     * @ORM\Column(name="ReservationStatus", type="string", length=255)
+     */
+    private $ReservationStatus;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -68,7 +75,6 @@ class Reservation
      */
     private $userService;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Swap\PlatformBundle\Entity\Service",inversedBy="reservations")
      * @ORM\JoinColumn(nullable=true)
@@ -78,6 +84,28 @@ class Reservation
     const RESA_WAITING = 0;
     const RESA_ACCEPTED = 1;
     const OLD_RESA = 2;
+    const DELETE_STATUS = 3;
+
+    public function __construct() 
+    {
+        $this->resaStatus();
+    }
+
+    public function resaStatus() {
+        $date = new \Datetime();
+        if ($this->dateDeparture > $date){
+            $this->setStatus(self::RESA_ACCEPTED);
+        }
+        if ($this->dateDeparture < $date) {
+            $this->setStatus(self::OLD_RESA);
+        }
+    }
+
+    public function DeleteNotification() {
+        $status = '3';
+        $this->setStatus($status);
+    }
+
 
     /**
      * Get id
@@ -98,9 +126,9 @@ class Reservation
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        $this->status = $status;       
 
-        return $this;
+        return $this; 
     }
 
     /**

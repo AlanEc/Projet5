@@ -57,6 +57,13 @@ class Reservation
     private $status;
 
     /**
+     * @var ReservationStatus
+     *
+     * @ORM\Column(name="ReservationStatus", type="string", length=255, nullable=true)
+     */
+    private $ReservationStatus;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Swap\UserBundle\Entity\User",inversedBy="reservationsMade")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -67,7 +74,6 @@ class Reservation
      * @ORM\JoinColumn(nullable=true)
      */
     private $userService;
-
 
     /**
      * @ORM\ManyToOne(targetEntity="Swap\PlatformBundle\Entity\Service",inversedBy="reservations")
@@ -278,5 +284,29 @@ class Reservation
     public function getTotalSwapPoints()
     {
         return $this->totalSwapPoints;
+    }
+
+    /**
+     * Set reservationStatus
+     *
+     * @param string $reservationStatus
+     *
+     * @return Reservation
+     */
+    public function setReservationStatus($reservationStatus)
+    {
+        $this->ReservationStatus = $reservationStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get reservationStatus
+     *
+     * @return string
+     */
+    public function getReservationStatus()
+    {
+        return $this->ReservationStatus;
     }
 }

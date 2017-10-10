@@ -26,5 +26,22 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
 		->getQuery()
 		->getResult();
 	}
+
+	public function commentRecovery($idRecipient)
+    {
+		$qb = $this->createQueryBuilder('m');
+
+		$qb
+		->where('m.recipient = :recipient')
+		->setParameter('recipient', $idRecipient)
+		->andWhere($qb->expr()->orX(
+	      $qb->expr()->eq('m.comment', '1')
+	   	))
+		;
+
+		return $qb
+		->getQuery()
+		->getResult();
+	}
 }
 

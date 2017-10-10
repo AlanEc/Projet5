@@ -15,13 +15,8 @@
 				</a>
 			</div>
 		</div>
-		<div class="col-md-offset-1 col-md-7">
+		<div class="col-md-7">
 			<div class="panel-body shadow Compte">
-				<span class="Reservation"><p>Reservation</p><span>
-			</div>
-		</div>
-		<div class=" col-md-7">
-			<div class="panel-body shadow">
 			<h3>Reservation</h3>
 			<span class="sousTitre"><p>Effectuer une réservation</p><span>
 				{{ form_start(form) }}
@@ -29,10 +24,37 @@
 				{{ form_errors(form, { 'attr': { 'class' : 'form-control' }} ) }}
 				{{ form_row(form.dateArrival, { 'attr': { 'class' : 'form-control' }} ) }}
 				{{ form_row(form.dateDeparture, { 'attr': { 'class' : 'form-control' }} ) }}
-				{{ form_row(form.save, { 'attr': { 'class' : 'col-sm-offset-18 btn btn-primary ' }} ) }}        
+				{% if service.ModeResa == 'Reservation sur demande' %}
+					</br>
+					{{ form_row(form.save, { 'label': 'Envoyer une demande', 'attr': { 'class' : 'col-sm-offset-18 btn btn-primary ' }} ) }}     
+				{% else %}
+					</br>
+				 	{{ form_row(form.save, { 'label': 'Réservation instantanée', 'attr': { 'class' : 'col-sm-offset-18 btn btn-primary ' }} ) }}
+				{% endif %}
 				{{ form_rest(form, { 'attr': { 'class' : 'form-control' }} ) }}
 				{{ form_end(form, { 'attr': { 'class' : 'form-control' }} ) }}
 			</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel-body shadow Compte">
+					<span class="Comment"><p>Les derniers commentaires</p><span>
+					<hr>
+					{% for comment in comments %}
+						<div class="row">
+							<div class="col-xs-12">
+								{{ comment.author.username }}
+							</div>
+							<div class="col-xs-12">
+								{{ comment.content }}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				</div>
+			</div>
+			</div>
 		</div>
+	</div>
+	</div>
 
 {% endblock %}

@@ -29,13 +29,24 @@ class ReservationController extends Controller
 		;
 
 		$service = $repository->find($id);
-		$user = $this->getUser(); 
 
+		$messageRepository = $this
+		->getDoctrine()
+		->getManager()
+		->getRepository('SwapPlatformBundle:Message')
+		;
+
+		$idRecipient = $service->getUser()->getId();
+		$comments = $messageRepository->commentRecovery($idRecipient);
+		$user = $this->getUser(); 
 		if ($formBuilder->isValid()) { 
 			$reservation->setService($service);
 			$user->addReservationsMade($reservation);
 			$user->addUserReservation($reservation);
 			$reservation->setUserReservation($user);
+			if ($service->getModeResa() == 'Reservation sur demande') {
+				$reservation->setReservationStatus('pending request');
+			}
 			$reservation->setUserService($service->getUser());
 			$em = $this->getDoctrine()->getManager();
 			$calcul = $this->container->get('swap_points.CalculPoints');
@@ -52,6 +63,7 @@ class ReservationController extends Controller
 		return $this->render('SwapPlatformBundle:Service:focusSwap.html.twig', array(
 		'service' => $service,
 		'form' => $formBuilder->createView(),
+		'comments' => $comments,
 		));
     }
 }
