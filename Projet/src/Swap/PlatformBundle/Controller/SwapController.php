@@ -60,7 +60,7 @@ class SwapController extends Controller
 
         return $this->redirectToRoute('swap_manage_swap');
       }
-
+      
       return $this->render('SwapPlatformBundle:Swap:deleteSwap.html.twig', array(
       'serviceId' => $serviceId
       ));

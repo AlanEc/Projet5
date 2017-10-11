@@ -40,10 +40,12 @@ $('.multi-select-calender').pignoseCalendar({
 				} 
 				else if (date[1] !== null) {
 					$("#deleted_date_maxDate").val(date[1].format('YYYY-MM-DD'));
+					$("#deleted_date_maxDate").val('');
 				}
 
 				else {
 					$("#deleted_date_minDate").val(date[0].format('YYYY-MM-DD'));
+					$("#deleted_date_maxDate").val('');
 				}					
 			});
 		});	
