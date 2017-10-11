@@ -43,6 +43,29 @@ class SwapController extends Controller
       ));
     }
 
+    public function deleteSwapAction($serviceId, $delete) {
+
+      $repository = $this
+      ->getDoctrine()
+      ->getManager()
+      ->getRepository('SwapPlatformBundle:Service')
+      ;
+      
+      $service = $repository->find($serviceId);
+
+      if ($delete == 'yes') {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($service);
+        $em->flush();
+
+        return $this->redirectToRoute('swap_manage_swap');
+      }
+
+      return $this->render('SwapPlatformBundle:Swap:deleteSwap.html.twig', array(
+      'serviceId' => $serviceId
+      ));
+    }
+
     public function detailsSwapAction($id, Request $request)
     {
   		$repository = $this

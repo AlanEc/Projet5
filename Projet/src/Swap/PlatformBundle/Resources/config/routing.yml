@@ -34,6 +34,12 @@ swap_ajouter_service:
     path:     /ajouter-swap
     defaults: { _controller: SwapPlatformBundle:Swap:addSwap }
 
+swap_delete:
+    path:     /supprimer-swap/{serviceId}/{delete}
+    defaults: 
+        _controller: SwapPlatformBundle:Swap:deleteSwap
+        delete: 'no'
+
 swap_ajouter_service_details:
     path:     /ajouter-swap-details/{id}
     defaults: { _controller: SwapPlatformBundle:Swap:detailsSwap }

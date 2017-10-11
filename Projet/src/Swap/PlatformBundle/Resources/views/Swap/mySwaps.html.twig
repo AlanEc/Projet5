@@ -25,15 +25,17 @@
 						<a href="{{ path('swap_calendar', { 'serviceId': service.id }) }}">
 							<div id="mySwap" class="panel panel-default">
 								<div class="row">
-									<div class="col-md-5 col-md-offset-1 mySwaps">
+									<div class="col-md-8 col-md-offset-1 mySwaps">
 										<p>{{ service.categorie }} </p>
 										<p>{{ service.adresse }}</p>
 									</div>
-									<div class="col-md-2 col-md-offset-4 deletedSwap ">
-										<span class="glyphicon glyphicon-remove fontbig hidden-xs"></span>
-										<br>
-										<p>Supprimer</p>
-									</div>
+									<a href="{{path('swap_delete', { 'serviceId': service.id }) }}">
+										<div class="col-md-2  deletedSwap ">
+											<span class="glyphicon glyphicon-remove fontbig hidden-xs"></span>
+											<br>
+											<p>Supprimer</p>
+										</div>
+									</a>
 								</div>
 							</div>
 						</a>
