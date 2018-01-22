@@ -38,4 +38,18 @@ class ServiceRepository extends \Doctrine\ORM\EntityRepository
 		return $qb;
 	
 	}
+
+	public function swapsByAdress($adresse)
+    {
+		$qb = $this->createQueryBuilder('m');
+
+		$qb
+		->where('m.adresse = :adresse')
+		->setParameter('adresse', $adresse)
+		;
+
+		return $qb
+		->getQuery()
+		->getResult();
+	}
 }

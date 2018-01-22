@@ -108,7 +108,8 @@ class SwapController extends Controller
       } else {
         $adresse = "";
       }
-  $listSwaps = $repository->findAll();
+      $listSwaps = $repository->swapsByAdress($adresse);
+        var_dump($adresse);
       $defaultData = array('message' => 'Type your message here');
       $form = $this->createFormBuilder($defaultData)
         ->add('dateArrival', TextType::class, array(
@@ -162,21 +163,22 @@ class SwapController extends Controller
         } else { 
           $accomodation = "";
         } 
-        if ($data['accomodation'] == true) {
-         $listSwaps = $repository->findBy(
-          array('nombrePersonnes' => $data['numberPersons'], 'categorie' => $accomodation)        
-        );
-        }
         if ($data['meal'] == true) {
-        $listSwaps = $repository->findBy(
-        array('nombrePersonnes' => $data['numberPersons'], 'categorie' => $meal)        
+         $listSwaps = $repository->findBy(
+          array('nombrePersonnes' => $data['numberPersons'], 'categorie' => $meal)        
         );
-        } else {
-          $listSwaps = $repository->findBy(
-          array('nombrePersonnes' => $data['numberPersons'])        
-        ); 
         }
-      }
+        if ($data['accomodation'] == true) {
+        $listSwaps = $repository->findBy(
+        array('nombrePersonnes' => $data['numberPersons'], 'categorie' => $accomodation)        
+        ); 
+        } 
+        // else {
+        //   $listSwaps = $repository->findBy(
+        //   array('nombrePersonnes' => $data['numberPersons'])        
+        // ); 
+        // }
+      } 
 
     	return $this->render('SwapPlatformBundle:Service:searchSwap.html.twig', array(
       'listSwaps' => $listSwaps,
@@ -192,6 +194,36 @@ class SwapController extends Controller
         'user' => $user,
         'services' => $user->getServices(),
       ));
+    }
+
+    public function reactivateDateAction(Request $request) 
+    {
+      if ($request->isXmlHttpRequest()) {
+        $data = $request->get('data');
+
+        if ($data) {
+          $repository = $this
+          ->getDoctrine()
+          ->getManager()
+          ->getRepository('SwapPlatformBundle:DeletedDate')
+          ;
+
+          $reactivateDate = $repository->find($data);
+
+          $em = $this->getDoctrine()->getManager();
+          $em->remove($reactivateDate);
+          $em->flush();
+
+          return new JsonResponse();
+        } 
+
+        else {
+          return new JsonResponse(array('error' => 'true'));
+        }
+      }
+      else {
+        throw new NotFoundHttpException('Ce n\'est pas une requette ajax');
+      }
     }
 
     public function manageCalendarAction($serviceId, Request $request)
@@ -243,10 +275,11 @@ class SwapController extends Controller
       ));
     }
 
-     public function ajaxAction(Request $request)
+    public function ajaxAction(Request $request)
     {
       if ($request->isXmlHttpRequest()) {
         $data = $request->get('data');
+        var_dump($request);
         $services = $this->getDoctrine()
         ->getRepository(Service::class)
         ->serviceRecovery($data);
